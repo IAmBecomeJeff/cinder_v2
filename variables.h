@@ -8,6 +8,7 @@
 
 #define NUM_LEDS 576
 
+#define qsubd(x, b) ((x>b)?wave_brightness:0)
 uint8_t max_bright = 255;
 uint8_t the_delay = 10;
 uint8_t wave_brightness = 255;

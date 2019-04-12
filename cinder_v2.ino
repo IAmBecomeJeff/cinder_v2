@@ -57,7 +57,7 @@ void loop() {
 			blending_ratio += 1;
 		}
 		for (int i = 0; i < NUM_LEDS; i++) {
-			actual_leds.strip[i] = blend(old_leds.strip[i], new_led.strip[i], blending_ratio);
+			actual_leds.strip[i] = blend(old_leds.strip[i], new_leds.strip[i], blending_ratio);
 		}
 		the_delay = (new_leds.this_delay + old_leds.this_delay) / 2;
 		if (blending_ratio >= 255) {
