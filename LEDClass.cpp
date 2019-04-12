@@ -1,6 +1,7 @@
 #include "LEDClass.h"
 
 LEDClass::LEDClass(void) {
+  CRGB strip[NUM_LEDS];
 	start_index = 0;
 	this_inc = 4;
 	this_index = 0;

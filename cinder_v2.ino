@@ -1,4 +1,4 @@
-#include <FastLED.h>
+#include "FastLED.h"
 #include "variables.h"
 #include "LEDClass.h"
 #include "transition.h"
@@ -13,12 +13,12 @@ LEDClass actual_leds;
 void setup() {
 	delay(2000);
 	LEDS.setBrightness(max_bright);
-	LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(actual_leds, NUM_LEDS);
+	LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(actual_leds.strip, NUM_LEDS);
 	set_max_power_in_volts_and_milliamps(5, 1750);
 	random16_set_seed(4832);
 	random16_add_entropy(analogRead(2));
 	actual_leds.target_palette = RainbowColors_p;
-	strobe_mode(led_mode, 1);
+	strobe_mode(actual_leds, 1);
 }
 
 void loop() {
@@ -60,7 +60,7 @@ void loop() {
 			actual_leds.strip[i] = blend(old_leds.strip[i], new_led.strip[i], blending_ratio);
 		}
 		the_delay = (new_leds.this_delay + old_leds.this_delay) / 2;
-		if (blending_ratio > = 255) {
+		if (blending_ratio >= 255) {
 			copy_led_classes(actual_leds, new_leds);
 			transitioning = 0;
 			blending_ratio = 0;
@@ -72,7 +72,7 @@ void loop() {
 	}
 
 
-	show_at_max_brithness_for_power();
+	show_at_max_brightness_for_power();
 }
 
 void strobe_mode(LEDClass leds, bool mc) {
