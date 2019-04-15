@@ -7,13 +7,16 @@
 #define LED_TYPE APA102
 
 #define NUM_LEDS 576
+#define STRIP_LENGTH 144
 
 #define qsubd(x, b) ((x>b)?wave_brightness:0)
+#define qsuba(x, b) ((x>b)?x-b:0)
 uint8_t max_bright = 255;
 uint8_t the_delay = 10;
 uint8_t wave_brightness = 255;
 uint8_t old_mode = 1;
-uint8_t max_mode = 2;
+uint8_t max_mode = 3;
 uint8_t transitioning = 0;
 bool transition_wait = 0;
 int blending_ratio = 0;
+int ringArray[144][4];      	  
