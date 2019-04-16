@@ -29,6 +29,14 @@ struct LEDStruct {
   	uint8_t led_mode = 0;
 	uint8_t numdots = 4;
 	uint8_t numdots_ring = 3;
-	int ringBeat[] = { 3, 2, 0, 1 };
+	uint8_t ringBeat[] = { 3, 2, 0, 1 };
 	uint8_t this_beat = 8;
+	uint8_t heat[STRIP_LENGTH];
+	uint8_t heat_ring[STRIP_LENGTH][4];
+	uint8_t heat_mirror[STRIP_LENGTH / 2];
+	uint8_t heat_mirror_ring[STRIP_LENGTH / 2][4];
+	uint8_t cooling = 55;
+	uint8_t sparking = 100;
+	uint8_t cooling_ring = { 55, 30, 70, 60 };
+	uint8_t sparking_ring = { 100, 70, 120, 40 };
 };

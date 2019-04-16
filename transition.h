@@ -36,6 +36,14 @@ void copy_led_classes(LEDStruct& a, LEDStruct& b) {
 	a.numdots = b.numdots;
 	a.numdots_ring = b.numdots_ring;
 	a.this_beat = b.this_beat; // ringBeat is defined in LEDStruct
+	a.heat = b.heat;
+	a.heat_ring = b.heat_ring;
+	a.heat_mirror = b.heat_mirror;
+	a.heat_mirror_ring = b.heat_mirror_ring;
+	a.cooling = b.cooling;
+	a.sparking = a.cooling;
+	a.cooling_ring = b.cooling_ring;
+	a.sparking_ring = b.sparking_ring;
 }
 
 

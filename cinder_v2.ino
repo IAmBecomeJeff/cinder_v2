@@ -7,6 +7,7 @@
 #include "one_sin_pal.h"
 #include "confetti.h"
 #include "juggle.h"
+#include "fire.h"
 
 #define qsubd(x, b) ((x>b)?wave_brightness:0)
 
@@ -31,8 +32,6 @@ void setup() {
 		ringArray[i][2] = 288 + i;
 		ringArray[i][3] = 575 - i;
 	}
-
-
 }
 
 void loop() {
