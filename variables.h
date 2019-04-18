@@ -19,4 +19,7 @@ uint8_t max_mode = 3;
 uint8_t transitioning = 0;
 bool transition_wait = 0;
 int blending_ratio = 0;
-int ringArray[144][4];      	  
+int ringArray[144][4];
+uint8_t gHue = 0;
+int combo_modes[3] = { 10, 11, 12 }; // led_modes that use a combo LEDStruct
+uint8_t combo_num = 0;

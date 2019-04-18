@@ -8,12 +8,18 @@
 #include "confetti.h"
 #include "juggle.h"
 #include "fire.h"
+#include "juggle_fire.h"
 
 #define qsubd(x, b) ((x>b)?wave_brightness:0)
 
 LEDStruct new_leds;
+new_leds.new = 1;
 LEDStruct old_leds;
 LEDStruct actual_leds;
+LEDStruct comboA_leds;
+LEDStruct comboB_leds;
+LEDStruct comboC_leds;
+LEDStruct comboD_leds;
 
 void setup() {
 	delay(2000);
@@ -48,20 +54,23 @@ void loop() {
 	}
 
 	EVERY_N_SECONDS(10) {
-		copy_led_classes(old_leds, actual_leds);	// copy the currently running leds into old_leds
+		if (transitioning == 1) { break; }
+		copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
 		new_leds.led_mode = random8(max_mode + 1);
 		transitioning = 1;
+		if (std::find(std::begin(combo_modes), std::end(combo_modes), new_leds.led_mode) != std::end(combo_modes)) { new_leds.combo = 1; } // check if led_mode is in list of modes that use combo LEDStructs 
+		combo_num = new_leds.combo + old_leds.combo;
 		strobe_mode(new_leds, 1);			// fill new_leds with the next animation
 	}
 
-	EVERY_N_MILLIS(old_timer, old_leds.this_delay) {
+	EVERY_N_MILLIS_I(old_timer, old_leds.this_delay) {
 		if (transitioning > 0) {
 			old_timer.setPeriod(old_leds.this_delay);
 			strobe_mode(old_leds, 0);
 		}
 	}
 
-	EVERY_N_MILLIS(new_timer, new_leds.this_delay) {
+	EVERY_N_MILLIS_I(new_timer, new_leds.this_delay) {
 		if (transitioning > 0) {
 			new_timer.setPeriod(new_leds.this_delay);
 			strobe_mode(new_leds, 0);
@@ -83,7 +92,7 @@ void loop() {
 			actual_leds.strip[i] = blend(old_leds.strip[i], new_leds.strip[i], blending_ratio);
 		}
 		if (blending_ratio >= 255) {
-			copy_led_classes(actual_leds, new_leds);
+			copy_led_struct(actual_leds, new_leds);
 			transitioning = 0;
 			blending_ratio = 0;
 			fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
@@ -98,9 +107,10 @@ void loop() {
 void strobe_mode(LEDStruct& leds, bool mc) {
 	if (mc) {
 		fill_solid(leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+		combo_handling();
 	}
 
-	switch (leds.led_mode) {
+	switch (leds.led_mode) { // keep combo_modes array updated for led_modes that use a combo LEDStruct (combo[A,B,C,D]_leds)
 		case 0:
 			if (mc) { leds.this_delay = 15; leds.target_palette = RainbowColors_p; leds.all_freq = 4; leds.this_bright = 255; leds.start_index = 0; leds.this_inc = 16; leds.this_cutoff = 200; leds.this_rot = 10; leds.this_speed = 3; }
 			one_sin_pal(leds);

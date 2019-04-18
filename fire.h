@@ -2,29 +2,23 @@
 #define FIRE_H
 
 // Functions:
-	// fire()			
-		// Moves a fire along the strip, with the rings all the same
+//				fire()			
+//				fire_pal()
+//				fire_mirror()
+//				fire_mirror_pal()
+//				fire_columns()
+//				fire_columns_pal()
+//				fire_mirror_columns()
+//				fire_mirror_columns_pal()
 
-	// fire_pal()
-		// Moves a fire along the strip with a palette, with the rings all the same
-
-	// fire_mirror()
-		// Fire from middle or ends, rings all the same
-
-	// fire_mirror_pal()
-		// Fire mirrored, with palette, rings all the same
-
-	// fire_rings()
-		// Fire with each strip a different flame
-
-	// fire_pal_rings()
-		// Fire with each strip a different flame, using palettes
-
-	// fire_mirror_rings()
-		// Mirrored fire, with each strip different flame
-
-	// fire_mirror_pal_rings()
-		// Mirrored fire, with palettes, each strip different
+// Variables:
+//				cooling
+//				sparking
+//				current_palete			(only used in pal modes)
+//				this_bright				(only used in pal modes)
+//				current_blending		(only used in pal modes)
+//				cooling_columns[]		(only used in columns modes)
+//				sparking_columns[]		(only used in columns modes)
 
 
 void fire(LEDStruct& leds) {
@@ -73,12 +67,12 @@ void fire_pal(LEDStruct& leds) {
 
 	if (leds.this_dir) {
 		for (int j = 0; j < STRIP_LENGTH; j++) {
-			ringPalette(leds, j, leds.current_palette, scale8(leds.heat[j], 240), leds.this_bright, leds.this_blending);
+			ringPalette(leds, j, leds.current_palette, scale8(leds.heat[j], 240), leds.this_bright, leds.current_blending);
 		}
 	}
 	else {
 		for (int j = 0; j < STRIP_LENGTH; j++) {
-			ringPalette(leds, (STRIP_LENGTH - 1) - j, leds.current_palette, scale8(leds.heat[j], 240), leds.this_bright, leds.this_blending);
+			ringPalette(leds, (STRIP_LENGTH - 1) - j, leds.current_palette, scale8(leds.heat[j], 240), leds.this_bright, leds.current_blending);
 		}
 	}
 }
@@ -107,7 +101,7 @@ void fire_mirror(LEDStruct& leds) {
 	}
 	else {
 		for (int j = 0; j < STRIP_LENGTH / 2; j++) {
-			CRGB hcolor = HeatColor(leds.heat_mirror[j]]);
+			CRGB hcolor = HeatColor(leds.heat_mirror[j]);
 			ringCRGB(leds, (STRIP_LENGTH / 2) - 1 - j, hcolor.r, hcolor.g, hcolor.b);
 			ringCRGB(leds, (STRIP_LENGTH / 2) + j, hcolor.r, hcolor.g, hcolor.b);
 		}
@@ -132,35 +126,35 @@ void fire_mirror_pal(LEDStruct& leds) {
 	if (leds.this_dir) {
 		for (int j = 0; j < STRIP_LENGTH / 2; j++) {
 			byte colorindex = scale8(leds.heat_mirror[j], 240);
-			ringPalette(leds, j, leds.current_palette, colorindex, leds.this_bright, leds.this_blending);
-			ringPalette(leds, STRIP_LENGTH - 1 - j, leds.current_palette, colorindex, leds.this_bright, leds.this_blending);
+			ringPalette(leds, j, leds.current_palette, colorindex, leds.this_bright, leds.current_blending);
+			ringPalette(leds, STRIP_LENGTH - 1 - j, leds.current_palette, colorindex, leds.this_bright, leds.current_blending);
 		}
 	}
 	else {
 		for (int j = 0; j < STRIP_LENGTH / 2; j++) {
 			byte colorindex = scale8(leds.heat_mirror[j], 240);
-			ringPalette(leds, (STRIP_LENGTH / 2) - 1 - j, leds.current_palette, colorindex, leds.this_bright, leds.this_blending);
-			ringPalette(leds, (STRIP_LENGTH / 2) + j, leds.current_palette, colorindex, leds.this_bright, leds.this_blending);
+			ringPalette(leds, (STRIP_LENGTH / 2) - 1 - j, leds.current_palette, colorindex, leds.this_bright, leds.current_blending);
+			ringPalette(leds, (STRIP_LENGTH / 2) + j, leds.current_palette, colorindex, leds.this_bright, leds.current_blending);
 		}
 	}
 }
 
 
-void fire_rings(LEDStruct& leds) {
+void fire_columns(LEDStruct& leds) {
 	for (byte r = 0; r < 4; r++) {
 		for (int i = 0; i < STRIP_LENGTH; i++) {
-			leds.heat_ring[i][r] = qsub8(leds.heat_ring[i][r], random8(0, ((leds.cooling_ring[r] * 10) / STRIP_LENGTH) + 2));
+			leds.heat_ring[i][r] = qsub8(leds.heat_ring[i][r], random8(0, ((leds.cooling_columns[r] * 10) / STRIP_LENGTH) + 2));
 		}
 		for (int k = STRIP_LENGTH - 3; k > 0; k--) {
 			leds.heat_ring[k][r] = (leds.heat_ring[k - 1][r] + leds.heat_ring[k - 2][r] + leds.heat_ring[k - 2][r]) / 3;
 		}
-		if (random8() < leds.sparking_ring[r]) {
+		if (random8() < leds.sparking_columns[r]) {
 			int y = random8(7);
 			leds.heat_ring[y][r] = qadd8(leds.heat_ring[y][r], random8(160, 255));
 		}
 		if (leds.this_dir) {
 			for (int j = 0; j < STRIP_LENGTH; j++) {
-				leds.strip[ringArray[j][r]] = HeatColor(leds.heat_ring[j]);
+				leds.strip[ringArray[j][r]] = HeatColor(leds.heat_ring[j][r]);
 			}
 		}
 		else {
@@ -172,43 +166,43 @@ void fire_rings(LEDStruct& leds) {
 }
 
 
-void fire_rings_pal(LEDStruct& leds) {
+void fire_columns_pal(LEDStruct& leds) {
 	for (byte r = 0; r < 4; r++) {
 		for (int i = 0; i < STRIP_LENGTH; i++) {
-			leds.heat_ring[i][r] = qsub8(leds.heat_ring[i][r], random8(0, ((leds.cooling_ring[r] * 10) / STRIP_LENGTH) + 2));
+			leds.heat_ring[i][r] = qsub8(leds.heat_ring[i][r], random8(0, ((leds.cooling_columns[r] * 10) / STRIP_LENGTH) + 2));
 		}
 		for (int k = STRIP_LENGTH - 3; k > 0; k--) {
 			leds.heat_ring[k][r] = (leds.heat_ring[k - 1][r] + leds.heat_ring[k - 2][r] + leds.heat_ring[k - 2][r]) / 3;
 		}
-		if (random8() < leds.sparking_ring[r]) {
+		if (random8() < leds.sparking_columns[r]) {
 			int y = random8(7);
 			leds.heat_ring[y][r] = qadd8(leds.heat_ring[y][r], random8(160, 255));
 		}
 		if (leds.this_dir) {
 			for (int j = 0; j < STRIP_LENGTH; j++) {
-				leds.strip[ringArray[STRIP_LENGTH - 1 - j][r]] = ColorFromPalette(leds.current_palette, scale(leds.heat_ring[j][r], 240));;
+				leds.strip[ringArray[STRIP_LENGTH - 1 - j][r]] = ColorFromPalette(leds.current_palette, scale8(leds.heat_ring[j][r], 240));
 			}
 		}
 		else {
 			for (int j = 0; j < STRIP_LENGTH; j++) {
-				leds.strip[ringArray[j][r]] = ColorFromPalette(leds.current_palette, scale(leds.heat_ring[j][r], 240));;
+				leds.strip[ringArray[j][r]] = ColorFromPalette(leds.current_palette, scale8(leds.heat_ring[j][r], 240));;
 			}
 		}
 	}
 }
 
 
-void fire_mirror_rings(LEDStruct& leds) {
+void fire_mirror_columns(LEDStruct& leds) {
 	for (byte r = 0; r < 4; r++) {
 		for (int i = 0; i < STRIP_LENGTH / 2; i++) {
-			leds.heat_mirror_ring[i][r] = qsub8(leds.heat_mirror_ring[i][r], random8(0, ((leds.cooling_ring[r] * 10) / (STRIP_LENGTH / 2)) + 2));
+			leds.heat_mirror_ring[i][r] = qsub8(leds.heat_mirror_ring[i][r], random8(0, ((leds.cooling_columns[r] * 10) / (STRIP_LENGTH / 2)) + 2));
 		}
 
 		for (int k = (STRIP_LENGTH / 2) - 1; k >= 2; k--) {
 			leds.heat_mirror_ring[k][r] = (leds.heat_mirror_ring[k - 1][r] + leds.heat_mirror_ring[k - 2][r] + leds.heat_mirror_ring[k - 2][r]) / 3;
 		}
 
-		if (random8() < leds.sparking_ring[r]) {
+		if (random8() < leds.sparking_columns[r]) {
 			int y = random8(7);
 			leds.heat_mirror_ring[y][r] = qadd8(leds.heat_mirror_ring[y][r], random8(160, 255));
 		}
@@ -231,17 +225,17 @@ void fire_mirror_rings(LEDStruct& leds) {
 }
 
 
-void fire_mirror_rings_pal(LEDStruct& leds) {
+void fire_mirror_columns_pal(LEDStruct& leds) {
 	for (byte r = 0; r < 4; r++) {
 		for (int i = 0; i < STRIP_LENGTH / 2; i++) {
-			leds.heat_mirror_ring[i][r] = qsub8(leds.heat_mirror_ring[i][r], random8(0, ((leds.cooling_ring[r] * 10) / (STRIP_LENGTH / 2)) + 2));
+			leds.heat_mirror_ring[i][r] = qsub8(leds.heat_mirror_ring[i][r], random8(0, ((leds.cooling_columns[r] * 10) / (STRIP_LENGTH / 2)) + 2));
 		}
 
 		for (int k = (STRIP_LENGTH / 2) - 1; k >= 2; k--) {
 			leds.heat_mirror_ring[k][r] = (leds.heat_mirror_ring[k - 1][r] + leds.heat_mirror_ring[k - 2][r] + leds.heat_mirror_ring[k - 2][r]) / 3;
 		}
 
-		if (random8() < leds.sparking_ring[r]) {
+		if (random8() < leds.sparking_columns[r]) {
 			int y = random8(7);
 			leds.heat_mirror_ring[y][r] = qadd8(leds.heat_mirror_ring[y][r], random8(160, 255));
 		}
@@ -250,7 +244,7 @@ void fire_mirror_rings_pal(LEDStruct& leds) {
 			for (int j = 0; j < STRIP_LENGTH / 2; j++) {
 				CRGB color = ColorFromPalette(leds.current_palette, scale8(leds.heat_mirror_ring[j][r], 240));
 				leds.strip[ringArray[j][r]] = color;
-				leds.strip[ringArray[STRIP_LENGTH - 1 - ][r]] = color;
+				leds.strip[ringArray[STRIP_LENGTH - 1 - j][r]] = color;
 			}
 		}
 		else {
