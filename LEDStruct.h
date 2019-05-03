@@ -40,6 +40,14 @@ struct LEDStruct {
 	uint8_t cooling_columns[4] = { 55, 30, 70, 60 };
 	uint8_t sparking_columns[4] = { 100, 70, 120, 40 };
 	int prev_pos = 0;
-	bool new = 0;
+	bool isNew = 0;
 	bool combo = 0;
 };
+
+LEDStruct new_leds;
+LEDStruct old_leds;
+LEDStruct actual_leds;
+LEDStruct comboA_leds;
+LEDStruct comboB_leds;
+LEDStruct comboC_leds;
+LEDStruct comboD_leds;

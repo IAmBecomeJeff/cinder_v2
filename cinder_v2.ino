@@ -1,5 +1,7 @@
 
 #include "FastLED.h"
+#include <algorithm>
+#include <iterator>
 #include "variables.h"
 #include "LEDStruct.h"
 #include "rings.h"
@@ -12,14 +14,7 @@
 
 #define qsubd(x, b) ((x>b)?wave_brightness:0)
 
-LEDStruct new_leds;
-new_leds.new = 1;
-LEDStruct old_leds;
-LEDStruct actual_leds;
-LEDStruct comboA_leds;
-LEDStruct comboB_leds;
-LEDStruct comboC_leds;
-LEDStruct comboD_leds;
+
 
 void setup() {
 	delay(2000);
@@ -28,6 +23,7 @@ void setup() {
 	set_max_power_in_volts_and_milliamps(5, 5000);
 	random16_set_seed(4832);
 	random16_add_entropy(analogRead(2));
+	new_leds.isNew = 1;
 	actual_leds.target_palette = RainbowColors_p;
 	strobe_mode(actual_leds, 1);
 
@@ -54,7 +50,6 @@ void loop() {
 	}
 
 	EVERY_N_SECONDS(10) {
-		if (transitioning == 1) { break; }
 		copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
 		new_leds.led_mode = random8(max_mode + 1);
 		transitioning = 1;

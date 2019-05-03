@@ -66,7 +66,7 @@
 
 // *******juggle with fire()********
 void juggle_fire(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -84,7 +84,7 @@ void juggle_fire(LEDStruct& leds) {
 
 
 void juggle_onedir_fire(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -102,7 +102,7 @@ void juggle_onedir_fire(LEDStruct& leds) {
 
 
 void juggle_columns_fire(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -120,7 +120,7 @@ void juggle_columns_fire(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -139,7 +139,7 @@ void juggle_columns_onedir_fire(LEDStruct& leds) {
 
 // *******juggle with fire_pal()********
 void juggle_fire_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -157,7 +157,7 @@ void juggle_fire_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -175,7 +175,7 @@ void juggle_onedir_fire_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -193,7 +193,7 @@ void juggle_columns_fire_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -212,7 +212,7 @@ void juggle_columns_onedir_fire_pal(LEDStruct& leds) {
 
 // *******juggle with fire_mirror()********
 void juggle_fire_mirror(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -230,7 +230,7 @@ void juggle_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -248,7 +248,7 @@ void juggle_onedir_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -266,7 +266,7 @@ void juggle_columns_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -285,7 +285,7 @@ void juggle_columns_onedir_fire_mirror(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_pal()********
 void juggle_fire_mirror_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -303,7 +303,7 @@ void juggle_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -321,7 +321,7 @@ void juggle_onedir_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -339,7 +339,7 @@ void juggle_columns_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -358,7 +358,7 @@ void juggle_columns_onedir_fire_mirror_pal(LEDStruct& leds) {
 
 // *******juggle with fire_columns()********
 void juggle_fire_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -376,7 +376,7 @@ void juggle_fire_columns(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -394,7 +394,7 @@ void juggle_onedir_fire_columns(LEDStruct& leds) {
 
 
 void juggle_columns_fire_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -412,7 +412,7 @@ void juggle_columns_fire_columns(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -430,7 +430,7 @@ void juggle_columns_onedir_fire_columns(LEDStruct& leds) {
 
 // *******juggle with fire_columns_pal()********
 void juggle_fire_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -448,7 +448,7 @@ void juggle_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -466,7 +466,7 @@ void juggle_onedir_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -484,7 +484,7 @@ void juggle_columns_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -503,7 +503,7 @@ void juggle_columns_onedir_fire_columns_pal(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_columns()********
 void juggle_fire_mirror_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -521,7 +521,7 @@ void juggle_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -539,7 +539,7 @@ void juggle_onedir_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -557,7 +557,7 @@ void juggle_columns_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_columns(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_columns(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -576,7 +576,7 @@ void juggle_columns_onedir_fire_mirror_columns(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_columns_pal()********
 void juggle_fire_mirror_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -594,7 +594,7 @@ void juggle_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -612,7 +612,7 @@ void juggle_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
@@ -630,7 +630,7 @@ void juggle_columns_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
-	if (leds.new && combo == 2) {
+	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {

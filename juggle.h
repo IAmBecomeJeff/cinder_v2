@@ -91,7 +91,7 @@ void juggle_columns_onedir(LEDStruct& leds, uint8_t ring) {
 void juggle_columns_onedir_all(LEDStruct& leds) {
 	for (uint8_t r = 0; r < 4; r++) {
 		leds.this_index = 0;
-		fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade) {
+		fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 			if (leds.this_dir) {
 				for (uint8_t i = 0; i < leds.numdots; i++) {
 					leds.strip[ringArray[beatsin16_halfdown(leds.ringBeat[r] + i + leds.numdots, 0, STRIP_LENGTH - 1)][r]] += ColorFromPalette(leds.current_palette, leds.this_index, leds.this_bright, leds.current_blending);
@@ -104,21 +104,20 @@ void juggle_columns_onedir_all(LEDStruct& leds) {
 					leds.this_index += leds.this_diff;
 				}
 			}
-		}
 	}
 }
 
 
-void sinelon_rainbow(LEDSStruct& leds) {
+void sinelon_rainbow(LEDStruct& leds) {
 	fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 	int pos = beatsin16(13, 0, STRIP_LENGTH);
-	if (pos > prev_pos) {
-		for (int i = prev_pos; i < pos + 1; i++) {
+	if (pos > leds.prev_pos) {
+		for (int i = leds.prev_pos; i < pos + 1; i++) {
 			ringCHSV(leds, i, gHue, leds.this_sat, leds.this_bright);
 		}
 	}
 	else {
-		for (int i = pos; i < prev_pos + 1; i++) {
+		for (int i = pos; i < leds.prev_pos + 1; i++) {
 			ringCHSV(leds, i, gHue, leds.this_sat, leds.this_bright);
 		}
 	}

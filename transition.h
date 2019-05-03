@@ -54,8 +54,8 @@ void copy_led_struct(LEDStruct& a, LEDStruct& b) {
 	a.cooling = b.cooling;
 	a.sparking = a.cooling;
   for (int r = 0; r < 4; r++){
-	  a.cooling_ring[r] = b.cooling_ring[r];
-	  a.sparking_ring[r] = b.sparking_ring[r];
+	  a.cooling_columns[r] = b.cooling_columns[r];
+	  a.sparking_columns[r] = b.sparking_columns[r];
   }
 	a.prev_pos = b.prev_pos;
 	a.combo = b.combo;
