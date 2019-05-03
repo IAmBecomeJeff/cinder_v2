@@ -66,14 +66,14 @@
 
 // *******juggle with fire()********
 void juggle_fire(LEDStruct& leds) {
-	if (leds.isNew && combo_num == 2) {
+	if (leds.isNew && combo_num == 2) {		// Checks if it's new LEDS and two combos are running (i.e. transitioning between two combo modes).. C and D will only go to new_leds during 2 combo mode
 		juggle_ring(comboC_leds);
 		fire(comboD_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {
 			leds.strip[i] = comboC_leds.strip[i] + comboD_leds.strip[i];
 		}
 	}
-	else {
+	else {		// otherwise, update the leds passed in, either new as only combo mode during transition, or actual as regular operation, or old after a transition without a second combo
 		juggle_ring(comboA_leds);
 		fire(comboB_leds);
 		for (int i = 0; i < NUM_LEDS; i++) {

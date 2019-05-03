@@ -9,7 +9,7 @@ struct LEDStruct {
   	uint8_t this_bright = 255;
   	uint8_t this_rot = 2;
   	uint8_t all_freq = 4;
-  	uint8_t this_delay = 10;
+  	uint16_t this_delay = 10;
   	uint8_t this_cutoff = 128;
 	uint8_t this_fade = 32;
 	uint8_t this_diff = 4;
@@ -26,6 +26,7 @@ struct LEDStruct {
   	CRGBPalette16 current_palette = CRGBPalette16(CRGB::Black);
   	CRGBPalette16 target_palette;
   	TBlendType current_blending = LINEARBLEND;
+	uint8_t palette_index = 0;
   	uint8_t led_mode = 0;
 	uint8_t numdots = 4;
 	uint8_t numdots_ring = 3;
@@ -47,6 +48,7 @@ struct LEDStruct {
 LEDStruct new_leds;
 LEDStruct old_leds;
 LEDStruct actual_leds;
+
 LEDStruct comboA_leds;
 LEDStruct comboB_leds;
 LEDStruct comboC_leds;

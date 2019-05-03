@@ -6,6 +6,7 @@
       "includePath": [
         "${projectRoot}..\\cinder_v2",
         "${projectRoot}..\\Arduino\\libraries\\FastLED",
+        "${projectRoot}..\\..\\..\\..\\Program Files (x86)\\Arduino\\hardware\\teensy\\avr\\libraries\\Bounce2",
         "${projectRoot}..\\..\\..\\..\\Program Files (x86)\\Arduino\\libraries",
         "${projectRoot}..\\..\\..\\..\\Program Files (x86)\\Arduino\\hardware\\teensy\\avr\\libraries",
         "${projectRoot}..\\Arduino\\libraries",
