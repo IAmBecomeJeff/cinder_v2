@@ -14,8 +14,10 @@
 #include "rings.h"
 #include "gradient_palettes.h"
 #include "support_functions.h"
+
 #include "one_sin_pal.h"
 #include "confetti.h"
+#include "two_sin.h"
 #include "juggle.h"
 #include "fire.h"
 #include "juggle_fire.h"
