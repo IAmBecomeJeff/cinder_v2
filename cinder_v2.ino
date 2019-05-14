@@ -95,7 +95,7 @@ void loop() {
 	EVERY_N_SECONDS(20) {		// Transition every N seconds
 		old_leds = actual_leds; //  copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
 		new_leds.led_mode = random8(max_mode + 1);
-		transitioning = 1;
+		transitioning = random8(1,max_transitions+1);
 		combo_check();
 		strobe_mode(new_leds, 1);			// fill new_leds with the next animation
 	}
@@ -120,26 +120,57 @@ void loop() {
 			strobe_mode(actual_leds, 0);
 		}
 	}
-
-	if (transitioning > 0) {						// TODO, update with multiple transition types
-		if (transition_wait) {
-			blending_ratio += 1;
+	
+	EVERY_N_MILLIS(25){
+		if (transitioning == 1) {						// TODO, update with multiple transition types
+			//if (transition_wait) {
+				blending_ratio += 1;
+			//}
+			for (int i = 0; i < NUM_LEDS; i++) {
+				actual_leds.strip[i] = blend(old_leds.strip[i], new_leds.strip[i], blending_ratio);
+			}
+			if (blending_ratio >= 255) {
+				actual_leds = new_leds; // copy_led_struct(actual_leds, new_leds);
+				transitioning = 0;
+				blending_ratio = 0;
+				fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+				fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+			}
+			//transition_wait = !transition_wait;
 		}
-		for (int i = 0; i < NUM_LEDS; i++) {
-			actual_leds.strip[i] = blend(old_leds.strip[i], new_leds.strip[i], blending_ratio);
+		if (transitioning == 2){
+			for (int r = 0; r < 4; r++){
+				for (int i = 0; i < line; i ++){
+					actual_leds.strip[ringArray[i][r]] = old_leds.strip[ringArray[i][r]];	
+				}
+				if (line < 143){
+					for (int i = 143; i > line; i--){
+						actual_leds.strip[ringArray[i][r]] = new_leds.strip[ringArray[i][r]];
+					}
+				}
+				for (int i = 1; i < 3; i++){
+					if (line - i > 0){
+						actual_leds.strip[ringArray[line - i][r]] = blend(lineColor, old_leds.strip[line - i][r], 32*i);
+					}
+					if (line + i < 143){
+						actual_leds.strip[ringArray[line + i][r]] = blend(lineColor, new_leds.strip[line + i][r], 32*i);
+					}
+				}
+				actual_leds.strip[ringArray[line][r]] = lineColor;
+				line--;
+				if (line == 0){
+					actual_leds = new_leds;
+					transitioning = 0;
+					fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+					fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+					line = 143;
+				}
+			}
 		}
-		if (blending_ratio >= 255) {
-			actual_leds = new_leds; // copy_led_struct(actual_leds, new_leds);
-			transitioning = 0;
-			blending_ratio = 0;
-			fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-			fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-		}
-		transition_wait = !transition_wait;
 	}
 
 	show_at_max_brightness_for_power();
-}
+} // loop()
 
 void strobe_mode(LEDStruct& leds, bool mc) {
 	if (mc) {

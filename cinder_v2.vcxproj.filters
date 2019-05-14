@@ -27,9 +27,6 @@
     <ClInclude Include="one_sin_pal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="transition.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="variables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
