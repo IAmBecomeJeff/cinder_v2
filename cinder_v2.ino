@@ -12,15 +12,15 @@
 #include "variables.h"
 #include "LEDStruct.h"
 #include "rings.h"
-#include "gradient_palettes.h"
-#include "support_functions.h"
+#include "gradient_palettes.h" 
+#include "support_functions.h" 
 
 #include "one_sin_pal.h"
 #include "confetti.h"
 #include "two_sin.h"
 #include "juggle.h"
-#include "fire.h"
-#include "juggle_fire.h"
+#include "fire.h" 
+#include "juggle_fire.h" 
 
 
 
@@ -123,49 +123,13 @@ void loop() {
 	
 	EVERY_N_MILLIS(25){
 		if (transitioning == 1) {						// TODO, update with multiple transition types
-			//if (transition_wait) {
-				blending_ratio += 1;
-			//}
-			for (int i = 0; i < NUM_LEDS; i++) {
-				actual_leds.strip[i] = blend(old_leds.strip[i], new_leds.strip[i], blending_ratio);
-			}
-			if (blending_ratio >= 255) {
-				actual_leds = new_leds; // copy_led_struct(actual_leds, new_leds);
-				transitioning = 0;
-				blending_ratio = 0;
-				fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-				fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-			}
-			//transition_wait = !transition_wait;
+			transition1();
 		}
 		if (transitioning == 2){
-			for (int r = 0; r < 4; r++){
-				for (int i = 0; i < line; i ++){
-					actual_leds.strip[ringArray[i][r]] = old_leds.strip[ringArray[i][r]];	
-				}
-				if (line < 143){
-					for (int i = 143; i > line; i--){
-						actual_leds.strip[ringArray[i][r]] = new_leds.strip[ringArray[i][r]];
-					}
-				}
-				for (int i = 1; i < 3; i++){
-					if (line - i > 0){
-						actual_leds.strip[ringArray[line - i][r]] = blend(lineColor, old_leds.strip[line - i][r], 32*i);
-					}
-					if (line + i < 143){
-						actual_leds.strip[ringArray[line + i][r]] = blend(lineColor, new_leds.strip[line + i][r], 32*i);
-					}
-				}
-				actual_leds.strip[ringArray[line][r]] = lineColor;
-				line--;
-				if (line == 0){
-					actual_leds = new_leds;
-					transitioning = 0;
-					fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-					fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
-					line = 143;
-				}
-			}
+			transition2();
+		}
+		if (transitioning == 3) {
+			transition3();
 		}
 	}
 

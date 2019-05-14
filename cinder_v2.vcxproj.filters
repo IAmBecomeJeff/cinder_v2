@@ -42,5 +42,20 @@
     <ClInclude Include="juggle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="__vm\.cinder_vs.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gradient_palettes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="juggle_fire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="support_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

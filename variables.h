@@ -28,8 +28,10 @@ int combo_modes[3] = { 10, 11, 12 }; // led_modes that use a combo LEDStruct
 uint8_t combo_num = 0;
 uint8_t overall_bright = 128;
 uint8_t line = 143;
+uint8_t downline = 71;
+uint8_t upline = 72;
 CRGB lineColor (CRGB::White);
-uint8_t max_transitions = 2;
+uint8_t max_transitions = 3;
 
 
 // KY-040 Rotary Module variables
