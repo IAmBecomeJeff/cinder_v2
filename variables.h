@@ -33,6 +33,8 @@ uint8_t downline = 71;
 uint8_t upline = 72;
 CRGB lineColor (CRGB::White);
 uint8_t max_transitions = 3;
+uint8_t xd[NUM_LEDS];
+uint8_t yd[NUM_LEDS];
 
 
 // KY-040 Rotary Module variables

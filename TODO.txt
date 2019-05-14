@@ -1,9 +1,6 @@
 TODO:
 
 Set up a flag for juggle to not run leds.this_index=0; leds.juggle_index_reset?
-Add colorwave 
 Review palette options
-Add more transition effects:
-	Single white line moving down
 Investigate FastLED.addLeds<stuff>(stuff).setDither(BRIGHTNESS < 255);
 Set up rotary dial to change lots more variables

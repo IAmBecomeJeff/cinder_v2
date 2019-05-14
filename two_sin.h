@@ -1,6 +1,10 @@
 #ifndef TWO_SIN_H
 #define TWO_SIN_H
 
+// two_sin()
+// two_sin_ring()
+// two_sin_pal_ring()
+
 void two_sin(LEDStruct& leds) {
 	if (leds.this_dir) { leds.this_phase -= leds.this_speed; leds.that_phase -= leds.that_speed; }
 	else { leds.this_phase += leds.this_speed; leds.that_phase += leds.that_speed; }

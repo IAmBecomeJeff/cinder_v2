@@ -20,6 +20,7 @@
 #include "fire.h" 
 #include "juggle_fire.h" 
 #include "colorwave.h"
+#include "circnosie.h"
 
 #include "strobe_mode.h"
 
@@ -54,6 +55,13 @@ void setup() {
 		ringArray[i][1] = 287 - i;
 		ringArray[i][2] = 288 + i;
 		ringArray[i][3] = 575 - i;
+	}
+
+	// Set up circnoise variables
+	for (long i = 0; i < NUM_LEDS; i++) {
+		uint8_t angle = (i * 256) / NUM_LEDS;
+		xd[i] = cos8(angle);
+		yd[i] = sin8(angle);
 	}
 }
 
