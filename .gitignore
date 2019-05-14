@@ -329,3 +329,5 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 __vm/.cinder_vs.vsarduino.h
+__vm/Compile.vmps.xml
+__vm/Configuration.Debug.vmps.xml

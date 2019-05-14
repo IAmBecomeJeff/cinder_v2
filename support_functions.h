@@ -16,8 +16,10 @@
 
 // Check if we're in a combo and update new_leds.combo value if so
 void combo_check() {	
-	if (std::find(std::begin(combo_modes), std::end(combo_modes), new_leds.led_mode) != std::end(combo_modes)) { // check if led_mode is in list of modes that use combo LEDStructs 
-		new_leds.combo = 1;
+	for (int i = 0; i < combo_modes_size; i++) {
+		if (new_leds.led_mode == combo_modes[i]) {
+			new_leds.combo = 1;
+		}
 	}
 	else { new_leds.combo = 0; }
 	combo_num = new_leds.combo + old_leds.combo;
@@ -105,10 +107,10 @@ void transition2() {
 		}
 		for (int i = 1; i < 4; i++) {
 			if (line - i >= 0) {
-				actual_leds.strip[ringArray[line - i][r]] = blend(lineColor, old_leds.strip[ringArray[line - i][r]], 32 * i);
+				actual_leds.strip[ringArray[line - i][r]] = nblend(lineColor, old_leds.strip[ringArray[line - i][r]], 32 * i);
 			}
 			if (line + i <= 143) {
-				actual_leds.strip[ringArray[line + i][r]] = blend(lineColor, new_leds.strip[ringArray[line + i][r]], 32 * i);
+				actual_leds.strip[ringArray[line + i][r]] = nblend(lineColor, new_leds.strip[ringArray[line + i][r]], 32 * i);
 			}
 		}
 		actual_leds.strip[ringArray[line][r]] = lineColor;
@@ -138,13 +140,13 @@ void transition3() {
 		actual_leds.strip[upline] = lineColor;
 		for (int i = 1; i < 4; i++) {
 			if (downline - i >= 0) {
-				actual_leds.strip[ringArray[downline - i][r]] = blend(lineColor, old_leds.strip[ringArray[downline - i][r]], 32 * i);
+				actual_leds.strip[ringArray[downline - i][r]] = nblend(lineColor, old_leds.strip[ringArray[downline - i][r]], 32 * i);
 			}
-			actual_leds.strip[ringArray[upline - i][r]] = blend(lineColor, new_leds.strip[ringArray[upline - i][r]], 32 * i);
+			actual_leds.strip[ringArray[upline - i][r]] = nblend(lineColor, new_leds.strip[ringArray[upline - i][r]], 32 * i);
 			if (upline + i <= 143) {
-				actual_leds.strip[ringArray[upline + i][r]] = blend(lineColor, old_leds.strip[ringArray[upline + i][r]], 32 * i);
+				actual_leds.strip[ringArray[upline + i][r]] = nblend(lineColor, old_leds.strip[ringArray[upline + i][r]], 32 * i);
 			}
-			actual_leds.strip[ringArray[downline + i][r]] = blend(lineColor, new_leds.strip[ringArray[upline - i][r]], 32 * i);
+			actual_leds.strip[ringArray[downline + i][r]] = nblend(lineColor, new_leds.strip[ringArray[downline + i][r]], 32 * i);
 		}
 	}
 	downline--;

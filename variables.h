@@ -25,6 +25,7 @@ int blending_ratio = 0;
 int ringArray[144][4];
 uint8_t gHue = 0;
 int combo_modes[3] = { 10, 11, 12 }; // led_modes that use a combo LEDStruct
+int combo_modes_size = sizeof(combo_modes) / sizeof(int);
 uint8_t combo_num = 0;
 uint8_t overall_bright = 128;
 uint8_t line = 143;
