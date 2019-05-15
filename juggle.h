@@ -21,11 +21,12 @@
 //				this_bright
 //				current_blending
 //				this_diff
+//				juggle_index_reset (bool)
 //				ringBeat[]		(only used in columns modes)
 //				gHue			(auto set; only used in sinelon modes)
 
 void juggle_ring(LEDStruct& leds) {
-	leds.this_index = 0;
+	if (leds.juggle_index_reset) { leds.this_index = 0; }
 	fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 	for (uint8_t i = 0; i < leds.numdots_ring; i++) {
 		ringPaletteAdd(leds, beatsin16(leds.this_beat + i + leds.numdots_ring, 0, STRIP_LENGTH - 1), leds.current_palette, leds.this_index, leds.this_bright, leds.current_blending);
@@ -34,7 +35,7 @@ void juggle_ring(LEDStruct& leds) {
 }
 
 void juggle_ring_onedir(LEDStruct& leds) {
-	leds.this_index = 0;
+	if (leds.juggle_index_reset) { leds.this_index = 0; }
 	fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 	if (!leds.this_dir) {
 		for (uint8_t i = 0; i < leds.numdots_ring; i++) {
@@ -51,7 +52,7 @@ void juggle_ring_onedir(LEDStruct& leds) {
 }
 
 void juggle_columns(LEDStruct& leds, uint8_t ring) {
-	leds.this_index = 0;
+	if (leds.juggle_index_reset) { leds.this_index = 0; }
 	fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 	for (uint8_t i = 0; i < leds.numdots; i++) {
 		leds.strip[ringArray[beatsin16(leds.ringBeat[ring] + i + leds.numdots, 0, STRIP_LENGTH - 1)][ring]] += ColorFromPalette(leds.current_palette, leds.this_index, leds.this_bright, leds.current_blending);
@@ -61,7 +62,7 @@ void juggle_columns(LEDStruct& leds, uint8_t ring) {
 
 void juggle_columns_all(LEDStruct& leds) {
 	for (int r = 0; r < 4; r++) {
-		leds.this_index = 0;
+		if (leds.juggle_index_reset) { leds.this_index = 0; }
 		fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 		for (uint8_t i = 0; i < leds.numdots; i++) {
 			leds.strip[ringArray[beatsin16(leds.ringBeat[r] + i + leds.numdots, 0, STRIP_LENGTH - 1)][r]] += ColorFromPalette(leds.current_palette, leds.this_index, leds.this_bright, leds.current_blending);
@@ -72,7 +73,7 @@ void juggle_columns_all(LEDStruct& leds) {
 
 
 void juggle_columns_onedir(LEDStruct& leds, uint8_t ring) {
-	leds.this_index = 0;
+	if (leds.juggle_index_reset) { leds.this_index = 0; }
 	fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 	if (leds.this_dir) {
 		for (uint8_t i = 0; i < leds.numdots; i++) {
@@ -90,7 +91,7 @@ void juggle_columns_onedir(LEDStruct& leds, uint8_t ring) {
 
 void juggle_columns_onedir_all(LEDStruct& leds) {
 	for (uint8_t r = 0; r < 4; r++) {
-		leds.this_index = 0;
+		if (leds.juggle_index_reset) { leds.this_index = 0; }
 		fadeToBlackBy(leds.strip, NUM_LEDS, leds.this_fade);
 			if (leds.this_dir) {
 				for (uint8_t i = 0; i < leds.numdots; i++) {
@@ -113,15 +114,15 @@ void sinelon_rainbow(LEDStruct& leds) {
 	int pos = beatsin16(13, 0, STRIP_LENGTH);
 	if (pos > leds.prev_pos) {
 		for (int i = leds.prev_pos; i < pos + 1; i++) {
-			ringCHSV(leds, i, gHue, leds.this_sat, leds.this_bright);
+			ringCHSV(leds, i, leds.gHue, leds.this_sat, leds.this_bright);
 		}
 	}
 	else {
 		for (int i = pos; i < leds.prev_pos + 1; i++) {
-			ringCHSV(leds, i, gHue, leds.this_sat, leds.this_bright);
+			ringCHSV(leds, i, leds.gHue, leds.this_sat, leds.this_bright);
 		}
 	}
-	gHue++;
+	leds.gHue++;
 }
 
 

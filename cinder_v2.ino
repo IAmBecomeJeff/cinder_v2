@@ -23,6 +23,7 @@
 #include "circnoise.h"
 #include "rainbow_march.h"
 #include "ripple.h"
+#include "plasma.h"
 
 #include "strobe_mode.h"
 
@@ -30,7 +31,7 @@
 
 void setup() {
 	delay(2000);
-	LEDS.setBrightness(max_bright);
+	LEDS.setBrightness(overall_bright);
 	LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(actual_leds.strip, NUM_LEDS);
 	set_max_power_in_volts_and_milliamps(5, 5000);	// TODO update this for live values
 	random16_set_seed(4832);
@@ -51,20 +52,8 @@ void setup() {
 	pinMode(switchA, INPUT_PULLUP);
 	pinMode(switchB, INPUT_PULLUP);
 
-	// Init ring array
-	for (uint8_t i = 0;i < 144;i++) {
-		ringArray[i][0] = i;
-		ringArray[i][1] = 287 - i;
-		ringArray[i][2] = 288 + i;
-		ringArray[i][3] = 575 - i;
-	}
+	array_init();
 
-	// Set up circnoise variables
-	for (long i = 0; i < NUM_LEDS; i++) {
-		uint8_t angle = (i * 256) / NUM_LEDS;
-		xd[i] = cos8(angle);
-		yd[i] = sin8(angle);
-	}
 }
 
 void loop() {
@@ -132,7 +121,7 @@ void loop() {
 		}
 	}
 	
-	EVERY_N_MILLIS(25){
+	EVERY_N_MILLIS(5){
 		if (transitioning == 1) {						// TODO, update with multiple transition types
 			transition1();
 		}
@@ -234,8 +223,8 @@ void checkDial() {
 					else {
 						overall_bright--;
 					}
-					constrain(overall_bright, 0, 128);
-					LEDS.setBrightness(overall_bright);
+					constrain(overall_bright, 0, max_bright);
+					FastLED.setBrightness(overall_bright);
 					//Serial.print("Brightness: ");
 					//Serial.println(this_bright);
 					break;

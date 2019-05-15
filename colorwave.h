@@ -3,6 +3,12 @@
 
 // This function draws color waves with an ever-changing,
 // widely-varying set of parameters, using a color palette.
+//
+//	colorwave()
+//
+//	Variables
+//		led.target_palette
+
 void colorwave(LEDStruct& leds)
 {
 	static uint16_t sPseudotime = 0;

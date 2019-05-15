@@ -1,6 +1,8 @@
 TODO:
 
-Set up a flag for juggle to not run leds.this_index=0; leds.juggle_index_reset?
 Review palette options
 Investigate FastLED.addLeds<stuff>(stuff).setDither(BRIGHTNESS < 255);
 Set up rotary dial to change lots more variables
+Set up Serial input for keyboard testing
+Experiment with circnoise values
+

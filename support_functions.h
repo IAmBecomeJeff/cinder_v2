@@ -14,6 +14,8 @@
 //		repeat
 
 
+// *************** Combo Mode Functions ***************
+
 // Check if we're in a combo and update new_leds.combo value if so
 void combo_check() {	
 	for (int i = 0; i < combo_modes_size; i++) {
@@ -41,16 +43,13 @@ void combo_handling() {
 	}
 }
 
+// *************** Rotary Knob Functions ***************
+
 // Increase or decrease LEDStruct's delay based on boolean direction
 void delay_change(LEDStruct& leds, bool delay_direction) {
-	if (delay_direction) {
-		leds.this_delay++;
-	}
-	else {
-		if (leds.this_delay == 1) { leds.this_delay = 1; }
-		else { leds.this_delay--; }
-	}
-	constrain(leds.this_delay, 1, 1000);
+	if (delay_direction) { leds.this_delay++; }
+	else { leds.this_delay--; }
+	constrain(leds.this_delay, 5, 1000);
 }
 
 
@@ -78,6 +77,7 @@ void palette_change(LEDStruct& leds, bool direction) {
 }
 
 
+// *************** TRANSITION FUNCTIONS ***************
 void transition1() {
 	//if (transition_wait) {
 	blending_ratio += 1;
@@ -95,7 +95,7 @@ void transition1() {
 	//transition_wait = !transition_wait;
 }
 
-void transition2() {
+void transition2() { // White line drops down
 	for (int r = 0; r < 4; r++) {
 		for (int i = 0; i < line; i++) {
 			actual_leds.strip[ringArray[i][r]] = old_leds.strip[ringArray[i][r]];
@@ -126,7 +126,7 @@ void transition2() {
 }
 
 
-void transition3() {
+void transition3() { // White lines from middle
 	for (int r = 0; r < 4; r++){
 		for (int i = 0; i < STRIP_LENGTH; i++) {
 			if (i < downline ||  i > upline) {
@@ -162,67 +162,95 @@ void transition3() {
 }
 
 
-//// May not need this, if structA = structB works:
-//void copy_led_struct(LEDStruct& a, LEDStruct& b) {
-//	a.start_index = b.start_index;
-//	a.this_inc = b.this_inc;
-//	a.this_index = b.this_index;
-//	a.this_dir = b.this_dir;
-//	a.this_phase = b.this_phase;
-//	a.this_speed = b.this_speed;
-//	a.this_bright = b.this_bright;
-//	a.this_rot = b.this_rot;
-//	a.all_freq = b.all_freq;
-//	a.this_delay = b.this_delay;
-//	a.this_cutoff = b.this_cutoff;
-//	a.this_fade = b.this_fade;
-//	a.this_diff = b.this_diff;
-//	a.bg_clr = b.bg_clr;
-//	a.bg_bri = b.bg_bri;
-//	a.bg_sat = b.bg_sat;
-//	a.that_phase = b.that_phase;
-//	a.that_speed = b.that_speed;
-//	a.that_hue = b.that_hue;
-//	a.that_rot = b.that_rot;
-//	a.this_hue = b.this_hue;
-//	a.this_sat = b.this_sat;
-//	a.that_sat = b.that_sat;
-//	a.current_palette = b.current_palette;
-//	a.current_blending = b.current_blending;
-//	a.target_palette = b.target_palette;
-//	a.palette_index = b.palette_index;
-//	a.led_mode = b.led_mode;
-//	for (int i = 0; i < NUM_LEDS; i++) {
-//		a.strip[i] = b.strip[i];
-//	}
-//	a.led_mode = b.led_mode;
-//	a.numdots = b.numdots;
-//	a.numdots_ring = b.numdots_ring;
-//	a.this_beat = b.this_beat;
-//	for (int i = 0; i < 4; i++) {
-//		a.ringBeat[i] = b.ringBeat[i];
-//	}
-//	for (int i = 0; i < STRIP_LENGTH; i++) {
-//		a.heat[i] = b.heat[i];
-//		for (int r = 0; r > 4; r++) {
-//			a.heat_ring[i][r] = b.heat_ring[i][r];
-//		}
-//	}
-//	for (int i = 0; i < STRIP_LENGTH / 2; i++) {
-//		a.heat_mirror[i] = b.heat_mirror[i];
-//		for (int r = 0; r < 4; r++) {
-//			a.heat_mirror_ring[i][r] = b.heat_mirror_ring[i][r];
-//		}
-//	}
-//	a.cooling = b.cooling;
-//	a.sparking = a.cooling;
-//	for (int r = 0; r < 4; r++) {
-//		a.cooling_columns[r] = b.cooling_columns[r];
-//		a.sparking_columns[r] = b.sparking_columns[r];
-//	}
-//	a.prev_pos = b.prev_pos;
-//	a.combo = b.combo;
-//}
+void transition4() { // Fade old_leds to Red, and return back to new_leds
+	if (red_direction) {
+		amount_of_red++;
+		for (uint16_t i = 0; i < NUM_LEDS; i++) {
+			actual_leds.strip[i] = nblend(old_leds.strip[i], CRGB(255,0,0), amount_of_red);
+		}
+		if (amount_of_red == 255) { red_direction = 0; }
+	}
+	else {
+		amount_of_red--;
+		for (uint16_t i = 0; i < NUM_LEDS; i++) {
+			actual_leds.strip[i] = nblend(new_leds.strip[i], CRGB(255,0,0), amount_of_red);
+		}
+		if (amount_of_red == 0) {
+			red_direction = 1;
+			transitioning = 0;
+			actual_leds = new_leds;
+			fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+			fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
+		}
+	}
+}
+
+
+
+// *************** Initialization function for setup() ***************
+void array_init() {
+	// Init ring array
+	for (uint8_t i = 0; i < STRIP_LENGTH; i++) {
+		ringArray[i][0] = i;
+		ringArray[i][1] = 287 - i;
+		ringArray[i][2] = 288 + i;
+		ringArray[i][3] = 575 - i;
+	}
+
+	// Set up circnoise variables
+	for (long i = 0; i < NUM_LEDS; i++) {
+		uint8_t angle = (i * 256) / NUM_LEDS;
+		xd[i] = cos8(angle);
+		yd[i] = sin8(angle);
+	}
+
+	// Init Spiral Arrays
+	for (uint8_t i = 0; i < STRIP_LENGTH; i += 4 * w) {
+		for (uint8_t j = 0; j < w; j++) {
+			spiralArray[0][i + j] = i + j;
+			spiralArray[0][i + j + w] = 287 - w - i - j;
+			spiralArray[0][i + j + 2 * w] = 288 + 2 * w + i + j;
+			spiralArray[0][i + j + 3 * w] = 575 - 3 * w - i - j;
+			spiralArray[1][i + j] = 287 - i - j;
+			spiralArray[1][i + j + w] = 288 + w + i + j;
+			spiralArray[1][i + j + 2 * w] = 575 - 2 * w - i - j;
+			spiralArray[1][i + j + 3 * w] = 3 * w + i + j;
+			spiralArray[2][i + j] = 288 + i + j;
+			spiralArray[2][i + j + w] = 575 - w - i - j;
+			spiralArray[2][i + j + 2 * w] = 2 * w + i + j;
+			spiralArray[2][i + j + 3 * w] = 287 - 3 * w - i - j;
+			spiralArray[3][i + j] = 575 - i - j;
+			spiralArray[3][i + j + w] = w + i + j;
+			spiralArray[3][i + j + 2 * w] = 287 - 2 * w - i - j;
+			spiralArray[3][i + j + 3 * w] = 288 + 3 * w + i + j;
+		}
+	}
+
+	for (int i = 0; i < STRIP_LENGTH; i += 4 * w) {
+		for (int j = 0; j < w; j++) {
+			spiralArrayRev[0][i + j] = i + j;
+			spiralArrayRev[0][i + j + w] = 575 - w - i - j;
+			spiralArrayRev[0][i + j + 2 * w] = 288 + 2 * w + i + j;
+			spiralArrayRev[0][i + j + 3 * w] = 287 - 3 * w - i - j;
+
+			spiralArrayRev[1][i + j] = 287 - i - j;
+			spiralArrayRev[1][i + j + w] = w + i + j;
+			spiralArrayRev[1][i + j + 2 * w] = 575 - 2 * w - i - j;
+			spiralArrayRev[1][i + j + 3 * w] = 288 + 3 * w + i + j;
+
+			spiralArrayRev[2][i + j] = 288 + i + j;
+			spiralArrayRev[2][i + j + w] = 287 - w - i - j;
+			spiralArrayRev[2][i + j + 2 * w] = 2 * w + i + j;
+			spiralArrayRev[2][i + j + 3 * w] = 575 - 3 * w - i - j;
+
+			spiralArrayRev[3][i + j] = 575 - i - j;
+			spiralArrayRev[3][i + j + w] = 288 + w + i + j;
+			spiralArrayRev[3][i + j + 2 * w] = 287 - 2 * w - i - j;
+			spiralArrayRev[3][i + j + 3 * w] = 3 * w + i + j;
+		}
+	}
+}
+
 
 
 #endif
