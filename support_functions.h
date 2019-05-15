@@ -20,8 +20,8 @@ void combo_check() {
 		if (new_leds.led_mode == combo_modes[i]) {
 			new_leds.combo = 1;
 		}
+		else { new_leds.combo = 0; }
 	}
-	else { new_leds.combo = 0; }
 	combo_num = new_leds.combo + old_leds.combo;
 }
 
@@ -129,7 +129,7 @@ void transition2() {
 void transition3() {
 	for (int r = 0; r < 4; r++){
 		for (int i = 0; i < STRIP_LENGTH; i++) {
-			if (i < downline || if i > upline) {
+			if (i < downline ||  i > upline) {
 				actual_leds.strip[ringArray[i][r]] = old_leds.strip[ringArray[i][r]];
 			}
 			if (i > downline && i < upline) {

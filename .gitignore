@@ -333,3 +333,4 @@ __vm/Compile.vmps.xml
 __vm/Configuration.Debug.vmps.xml
 cinder_v2.vcxproj.filters
 cinder_v2.vcxproj
+__vm/

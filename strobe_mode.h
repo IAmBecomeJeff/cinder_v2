@@ -22,7 +22,7 @@ void strobe_mode(LEDStruct& leds, bool mc) {
 
 	case 3:
 		if (mc) { leds.this_delay = 20; leds.target_palette = PartyColors_p; leds.this_inc = 1; leds.this_fade = 2; leds.this_diff = 32; leds.this_bright = 255; }
-		confetti_pal(leds);
+		confetti(leds);
 		break;
 
 	}

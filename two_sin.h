@@ -4,6 +4,17 @@
 // two_sin()
 // two_sin_ring()
 // two_sin_pal_ring()
+//
+//	Variables:
+//		leds.this_dir
+//		leds.this_speed
+//		leds.that_speed
+//		leds.this_rot
+//		leds.that_rot
+//		leds.all_freq
+//		leds.this_cutoff
+//		leds.this_sat
+//		leds.target_palette
 
 void two_sin(LEDStruct& leds) {
 	if (leds.this_dir) { leds.this_phase -= leds.this_speed; leds.that_phase -= leds.that_speed; }

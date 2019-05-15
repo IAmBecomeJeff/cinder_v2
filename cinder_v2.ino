@@ -20,7 +20,9 @@
 #include "fire.h" 
 #include "juggle_fire.h" 
 #include "colorwave.h"
-#include "circnosie.h"
+#include "circnoise.h"
+#include "rainbow_march.h"
+#include "ripple.h"
 
 #include "strobe_mode.h"
 
