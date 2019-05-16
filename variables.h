@@ -33,7 +33,7 @@ uint8_t w = 3; // spiral array width
 
 // Transition and mode variables
 uint8_t old_mode = 0;
-uint8_t max_mode = 3;
+uint8_t max_mode = 4;
 uint8_t transitioning = 0;
 bool transition_wait = 0;
 uint8_t blending_ratio = 0;
