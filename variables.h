@@ -20,6 +20,8 @@ uint8_t overall_bright = max_bright;
 #define qsubd(x, b) ((x>b)?wave_brightness:0)
 #define qsuba(x, b) ((x>b)?x-b:0)
 
+bool glitter;
+
 
 // Indexing arrays
 uint8_t ringArray[144][4];
@@ -62,3 +64,10 @@ int palette_index;
 unsigned long lastDebounceTime = 0;
 unsigned long debounceDelay = 50;
 Bounce debouncer = Bounce();
+
+
+// Serial variables (remove after testing)
+byte in_byte;
+int this_arg;
+#define SERIAL_BAUDRATE 57600
+#define SERIAL_TIMEOUT 500
