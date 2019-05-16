@@ -162,22 +162,27 @@ void transition3() { // White lines from middle
 }
 
 
-void transition4() { // Fade old_leds to Red, and return back to new_leds
-	if (red_direction) {
-		amount_of_red++;
+void transition4() { // Fade old_leds to random color, and return back to new_leds
+	if (get_new_color) {
+		transition_color = CHSV(random8(), 255, 255);
+		get_new_color = 0;
+	}
+	if (color_direction) {
+		amount_of_color++;
 		for (uint16_t i = 0; i < NUM_LEDS; i++) {
-			actual_leds.strip[i] = nblend(old_leds.strip[i], CRGB(255,0,0), amount_of_red);
+			actual_leds.strip[i] = nblend(old_leds.strip[i], transition_color, amount_of_color);
 		}
-		if (amount_of_red == 255) { red_direction = 0; }
+		if (amount_of_color == 255) { color_direction = 0; }
 	}
 	else {
-		amount_of_red--;
+		amount_of_color--;
 		for (uint16_t i = 0; i < NUM_LEDS; i++) {
-			actual_leds.strip[i] = nblend(new_leds.strip[i], CRGB(255,0,0), amount_of_red);
+			actual_leds.strip[i] = nblend(new_leds.strip[i], transition_color, amount_of_color);
 		}
-		if (amount_of_red == 0) {
-			red_direction = 1;
+		if (amount_of_color == 0) {
+			color_direction = 1;
 			transitioning = 0;
+			get_new_color = 1;
 			actual_leds = new_leds;
 			fill_solid(old_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
 			fill_solid(new_leds.strip, NUM_LEDS, CRGB(0, 0, 0));
