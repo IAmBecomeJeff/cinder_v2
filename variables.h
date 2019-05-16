@@ -35,9 +35,9 @@ uint8_t old_mode = 0;
 uint8_t max_mode = 3;
 uint8_t transitioning = 0;
 bool transition_wait = 0;
-int blending_ratio = 0;
-int combo_modes[3] = { 10, 11, 12 }; // led_modes that use a combo LEDStruct
-int combo_modes_size = sizeof(combo_modes) / sizeof(int);
+uint8_t blending_ratio = 0;
+uint8_t combo_modes[3] = { 10, 11, 12 }; // led_modes that use a combo LEDStruct
+uint8_t combo_modes_size = sizeof(combo_modes) / sizeof(uint8_t);
 uint8_t combo_num = 0;
 uint8_t line = 143;
 uint8_t downline = 71;
@@ -46,8 +46,9 @@ CRGB lineColor(CRGB::White);
 CHSV transition_color(CHSV(0, 255, 255));
 uint8_t amount_of_color = 0;
 bool color_direction = 1;
-uint8_t max_transitions = 4;
 bool get_new_color = 1;
+max_transitions = 4;
+
 
 
 // KY-040 Rotary Module variables

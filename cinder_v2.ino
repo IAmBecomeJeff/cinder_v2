@@ -95,7 +95,7 @@ void loop() {
 	EVERY_N_SECONDS(20) {		// Transition every N seconds
 		old_leds = actual_leds; //  copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
 		new_leds.led_mode = random8(max_mode + 1);
-		transitioning = random8(1,max_transitions+1);
+		transitioning = random8(1, max_transitions + 1);
 		combo_check();
 		strobe_mode(new_leds, 1);			// fill new_leds with the next animation
 	}
