@@ -14,6 +14,16 @@
 //		repeat
 
 
+// *************** Glitter *****************
+
+void addglitter(fract8 chanceOfGlitter)
+{
+	if (random8() < chanceOfGlitter) {
+		leds[random16(NUM_LEDS - 1)] += CRGB::White;
+	}
+}
+
+
 // *************** Combo Mode Functions ***************
 
 // Check if we're in a combo and update new_leds.combo value if so
@@ -42,6 +52,34 @@ void combo_handling() {
 		//copy_led_struct(comboD_leds, new_leds);
 	}
 }
+
+
+
+// *************** Switch Functions ****************
+
+//    Switch A
+void checkDirection() {
+	if (digitalRead(switchA)) {
+		if (transitioning == 0) {
+			actual_leds.this_dir = 0;
+		}
+		else {
+			new_leds.this_dir = 0;
+			old_leds.this_dir = 0;
+		}
+	}
+	else {
+		if (transitioning == 0) {
+			actual_leds.this_dir = 1;
+		}
+		else {
+			new_leds.this_dir = 1;
+			old_leds.this_dir = 1;
+		}
+	}
+}
+
+
 
 // *************** Rotary Knob Functions ***************
 
