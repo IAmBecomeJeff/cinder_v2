@@ -26,14 +26,10 @@
 #include "plasma.h"
 
 #include "strobe_mode.h"
-#include "readkeyboard.h"	// REMOVE when live
 
 
 
 void setup() {
-	Serial.begin(SERIAL_BAUDRATE);		// REMOVE when live
-	Serial.setTimeout(SERIAL_TIMEOUT);	// REMOVE when live
-
 	delay(2000);
 	LEDS.setBrightness(overall_bright);
 	LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(actual_leds.strip, NUM_LEDS);
@@ -62,14 +58,28 @@ void setup() {
 
 void loop() {
 
-	// Get keyboard input
-	readkeyboard();	// delete when live
-
 	// Check rotary dial
 	checkDial();
 
 	// Check switchA for direction
-	checkDirection();
+	if (digitalRead(switchA)) { 
+		if (transitioning == 0) {
+			actual_leds.this_dir = 0;
+		}
+		else {
+			new_leds.this_dir = 0;
+			old_leds.this_dir = 0;
+		}
+	}
+	else {
+		if (transitioning == 0) {
+			actual_leds.this_dir = 1;
+		}
+		else {
+			new_leds.this_dir = 1;
+			old_leds.this_dir = 1;
+		}
+	}
 
 	EVERY_N_MILLISECONDS(50) {	// Palette blending
 		uint8_t maxChanges = 24;
@@ -84,7 +94,7 @@ void loop() {
 
 	EVERY_N_SECONDS(20) {		// Transition every N seconds
 		old_leds = actual_leds; //  copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
-		new_leds.led_mode = random8(1,max_mode + 1);
+		new_leds.led_mode = random8(max_mode + 1);
 		transitioning = random8(1,max_transitions+1);
 		combo_check();
 		strobe_mode(new_leds, 1);			// fill new_leds with the next animation
@@ -122,8 +132,6 @@ void loop() {
 			transition3();
 		}
 	}
-
-	if (glitter) addglitter(10);
 
 	show_at_max_brightness_for_power();
 } // loop()
