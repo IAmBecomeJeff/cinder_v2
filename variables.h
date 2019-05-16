@@ -43,9 +43,11 @@ uint8_t line = 143;
 uint8_t downline = 71;
 uint8_t upline = 72;
 CRGB lineColor(CRGB::White);
-uint8_t amount_of_red = 0;
-bool red_direction = 0;
+CHSV transition_color(CHSV(0, 255, 255));
+uint8_t amount_of_color = 0;
+bool color_direction = 1;
 uint8_t max_transitions = 4;
+bool get_new_color = 1;
 
 
 // KY-040 Rotary Module variables

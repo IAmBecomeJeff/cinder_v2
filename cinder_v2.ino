@@ -131,6 +131,9 @@ void loop() {
 		if (transitioning == 3) {
 			transition3();
 		}
+		if (transitioning == 4){
+			transition4();
+		}
 	}
 
 	show_at_max_brightness_for_power();
