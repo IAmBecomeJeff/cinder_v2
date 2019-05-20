@@ -48,7 +48,7 @@ CHSV transition_color(CHSV(0, 255, 255));
 uint8_t amount_of_color = 0;
 bool color_direction = 1;
 bool get_new_color = 1;
-max_transitions = 4;
+uint8_t max_transitions = 4;
 
 
 

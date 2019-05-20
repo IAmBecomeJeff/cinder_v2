@@ -19,7 +19,7 @@
 void addglitter(fract8 chanceOfGlitter)
 {
 	if (random8() < chanceOfGlitter) {
-		leds[random16(NUM_LEDS - 1)] += CRGB::White;
+		actual_leds.strip[random16(NUM_LEDS - 1)] += CRGB::White;
 	}
 }
 
@@ -61,13 +61,14 @@ void combo_copy(LEDStruct& leds) {
 		comboC_leds.this_bright = leds.this_bright;
 		comboC_leds.this_diff = leds.this_diff;
 		comboC_leds.juggle_index_reset = leds.juggle_index_reset;
-		comboC_leds.ringBeat = leds.ringBeat;
 		comboC_leds.target_palette = leds.target_palette;
-
+    for (uint8_t i = 0; i < 4; i++){
+      comboC_leds.ringBeat[i] = leds.ringBeat[i];
+      comboD_leds.cooling_columns[i] = leds.cooling_columns[i];
+      comboD_leds.sparking_columns[i] = leds.sparking_columns[i];
+    }
 		comboD_leds.cooling = leds.cooling;
 		comboD_leds.sparking = leds.sparking;
-		comboD_leds.cooling_columns = leds.cooling_columns;
-		comboD_leds.sparking_columns = leds.sparking_columns;
 		comboD_leds.current_palette = fire_gp;
 	}
 	else {
@@ -77,13 +78,14 @@ void combo_copy(LEDStruct& leds) {
 		comboA_leds.this_bright = leds.this_bright;
 		comboA_leds.this_diff = leds.this_diff;
 		comboA_leds.juggle_index_reset = leds.juggle_index_reset;
-		comboA_leds.ringBeat = leds.ringBeat;
 		comboA_leds.target_palette = leds.target_palette;
-
+    for (uint8_t i = 0; i < 4; i++){
+      comboA_leds.ringBeat[i] = leds.ringBeat[i];
+      comboB_leds.cooling_columns[i] = leds.cooling_columns[i];
+      comboB_leds.sparking_columns[i] = leds.sparking_columns[i];
+    }
 		comboB_leds.cooling = leds.cooling;
 		comboB_leds.sparking = leds.sparking;
-		comboB_leds.cooling_columns = leds.cooling_columns;
-		comboB_leds.sparking_columns = leds.sparking_columns;
 		comboB_leds.current_palette = fire_gp;
 	}
 }

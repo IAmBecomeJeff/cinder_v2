@@ -24,6 +24,7 @@
 #include "rainbow_march.h"
 #include "ripple.h"
 #include "plasma.h"
+#include "spiral.h"
 
 #include "strobe_mode.h"
 #include "readkeyboard.h"
@@ -208,7 +209,7 @@ void checkDial() {
 						}
 					}
 					Serial.print("Delay: ");
-					Serial.println(this_delay);
+					Serial.println(actual_leds.this_delay);
 					break;
 
 				case 3:		// If button in stage 3:	Adjust brightness
@@ -221,7 +222,7 @@ void checkDial() {
 					constrain(overall_bright, 0, max_bright);
 					FastLED.setBrightness(overall_bright);
 					Serial.print("Brightness: ");
-					Serial.println(this_bright);
+					Serial.println(overall_bright);
 					break;
 
 			}

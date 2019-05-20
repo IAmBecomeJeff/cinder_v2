@@ -88,12 +88,12 @@ void readkeyboard() {
 		case 109:
 			old_leds = actual_leds;
 			new_leds.led_mode = Serial.parseInt();
-			new_leds.led_mode = constrain(led_mode, 1, max_mode);
+			new_leds.led_mode = constrain(new_leds.led_mode, 1, max_mode);
 			Serial.print("New mode: ");
 			Serial.println(new_leds.led_mode);
 			transitioning = random8(1, max_transitions + 1);
 			combo_check();
-			strobe_mode(new_leds.led_mode, 1); // strobe the updated mode, mc = 1, old = 0 (so cur_leds)		
+			strobe_mode(new_leds, 1); // strobe the updated mode, mc = 1, old = 0 (so cur_leds)		
 			break;
 
 			// Command: i Change this_inc (0-255)
