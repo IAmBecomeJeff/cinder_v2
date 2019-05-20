@@ -8,9 +8,9 @@
 #include "FastLED.h"
 #include "Bounce2.h"	// Debouncing the KY-040 rotary switch
 #include "variables.h"
+#include "gradient_palettes.h" 
 #include "LEDStruct.h"
 #include "rings.h"
-#include "gradient_palettes.h" 
 #include "support_functions.h" 
 
 #include "one_sin_pal.h"
@@ -142,8 +142,8 @@ void checkDial() {
 		if (rotary_function > 3) {	// If above max rotary modes, loop back to 0
 			rotary_function = 0;
 		}
-		//Serial.print("Button Function: ");	// Add back if we use Serial data again
-		//Serial.println(rotary_function);
+		Serial.print("Button Function: ");	// Add back if we use Serial data again
+		Serial.println(rotary_function);
 	}
 	
 	aVal = digitalRead(pinA);   // Read pinA
@@ -184,8 +184,8 @@ void checkDial() {
 							palette_change(old_leds, 0);
 						}
 					}
-					//Serial.print("Palette number: ");
-					//Serial.println(palette_index);
+					Serial.print("Palette number: ");
+					Serial.println(palette_index);
 					break;
 
 				case 2:		// If button is in stage 2:		Adjust delay speed   TODO: consider proportionally updating new and old speeds?
@@ -207,8 +207,8 @@ void checkDial() {
 							delay_change(actual_leds, 1);
 						}
 					}
-					//Serial.print("Delay: ");
-					//Serial.println(this_delay);
+					Serial.print("Delay: ");
+					Serial.println(this_delay);
 					break;
 
 				case 3:		// If button in stage 3:	Adjust brightness
@@ -220,8 +220,8 @@ void checkDial() {
 					}
 					constrain(overall_bright, 0, max_bright);
 					FastLED.setBrightness(overall_bright);
-					//Serial.print("Brightness: ");
-					//Serial.println(this_bright);
+					Serial.print("Brightness: ");
+					Serial.println(this_bright);
 					break;
 
 			}

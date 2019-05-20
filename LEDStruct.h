@@ -22,6 +22,7 @@ struct LEDStruct {
   	uint8_t this_rot = 2;
   	uint8_t all_freq = 4;
   	uint8_t this_cutoff = 128;
+	uint8_t that_cutoff = 200;
 	uint8_t this_diff = 4;
 	uint8_t bg_clr = 0;
 	uint8_t bg_bri = 128;

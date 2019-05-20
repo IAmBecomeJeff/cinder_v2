@@ -10,8 +10,7 @@
 //		leds.all_freq
 //		leds.this_phase (starting)
 //		leds.start_index (starting)
-//		leds.this_phase (starting)
-//		leds.current_palette
+//		leds.target_palette
 //		leds.current_blending
 //		leds.this_rot
 //

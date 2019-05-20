@@ -53,7 +53,40 @@ void combo_handling() {
 	}
 }
 
+void combo_copy(LEDStruct& leds) {
+	if (leds.isNew && combo_num == 2) {
+		comboC_leds.this_fade = leds.this_fade;
+		comboC_leds.numdots_ring = leds.numdots_ring;
+		comboC_leds.this_beat = leds.this_beat;
+		comboC_leds.this_bright = leds.this_bright;
+		comboC_leds.this_diff = leds.this_diff;
+		comboC_leds.juggle_index_reset = leds.juggle_index_reset;
+		comboC_leds.ringBeat = leds.ringBeat;
+		comboC_leds.target_palette = leds.target_palette;
 
+		comboD_leds.cooling = leds.cooling;
+		comboD_leds.sparking = leds.sparking;
+		comboD_leds.cooling_columns = leds.cooling_columns;
+		comboD_leds.sparking_columns = leds.sparking_columns;
+		comboD_leds.current_palette = fire_gp;
+	}
+	else {
+		comboA_leds.this_fade = leds.this_fade;
+		comboA_leds.numdots_ring = leds.numdots_ring;
+		comboA_leds.this_beat = leds.this_beat;
+		comboA_leds.this_bright = leds.this_bright;
+		comboA_leds.this_diff = leds.this_diff;
+		comboA_leds.juggle_index_reset = leds.juggle_index_reset;
+		comboA_leds.ringBeat = leds.ringBeat;
+		comboA_leds.target_palette = leds.target_palette;
+
+		comboB_leds.cooling = leds.cooling;
+		comboB_leds.sparking = leds.sparking;
+		comboB_leds.cooling_columns = leds.cooling_columns;
+		comboB_leds.sparking_columns = leds.sparking_columns;
+		comboB_leds.current_palette = fire_gp;
+	}
+}
 
 // *************** Switch Functions ****************
 

@@ -13,7 +13,9 @@
 //		leds.that_rot
 //		leds.all_freq
 //		leds.this_cutoff
+//		leds.that_cutoff
 //		leds.this_sat
+//		leds.that_sat
 //		leds.target_palette
 
 void two_sin(LEDStruct& leds) {
@@ -23,7 +25,7 @@ void two_sin(LEDStruct& leds) {
 	leds.that_hue += leds.that_rot;
 	for (int k = 0; k < NUM_LEDS - 1; k++) {
 		int this_bright = qsuba(cubicwave8((k*leds.all_freq) + leds.this_phase), leds.this_cutoff);
-		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.this_cutoff);
+		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.that_cutoff);
 		leds.strip[k] = CHSV(leds.this_hue, leds.this_sat, this_bright);
 		leds.strip[k] += CHSV(leds.that_hue, leds.that_sat, that_bright);
 	}
@@ -36,7 +38,7 @@ void two_sin_ring(LEDStruct& leds) {
 	leds.that_hue += leds.that_rot;
 	for (int k = 0; k < NUM_LEDS - 1; k++) {
 		int this_bright = qsuba(cubicwave8((k*leds.all_freq) + leds.this_phase), leds.this_cutoff);
-		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.this_cutoff);
+		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.that_cutoff);
 		ringCHSV(leds, k, leds.this_hue, leds.this_sat, this_bright);
 		ringCHSVAdd(leds, k, leds.that_hue, leds.that_sat, that_bright);
 	}
@@ -49,7 +51,7 @@ void two_sin_pal_ring(LEDStruct& leds) {
 	leds.that_hue += leds.that_rot; // that_hue will be palette pos
 	for (int k = 0; k < NUM_LEDS - 1; k++) {
 		int this_bright = qsuba(cubicwave8((k*leds.all_freq) + leds.this_phase), leds.this_cutoff);
-		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.this_cutoff);
+		int that_bright = qsuba(cubicwave8((k*leds.all_freq) + 128 + leds.that_phase), leds.that_cutoff);
 		ringCHSV(leds, k, leds.this_hue, leds.this_sat, this_bright);
 		ringPaletteAdd(leds, k, leds.current_palette, leds.that_hue, that_bright, leds.current_blending);
 	}

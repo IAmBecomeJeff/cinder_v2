@@ -1,3 +1,21 @@
+#ifndef ONE_SIN_PAL_H
+#define ONE_SIN_PAL_H
+
+//	one_sin_pal(leds)
+//	one_sin_pal_ring(leds)
+//
+//	Variables:
+//		this_dir
+//		start_index	(initial)
+//		this_inc
+//		this_speed
+//		this_phase (initial)
+//		all_freq
+//		this_cutoff
+//		target_palette
+//		current_blending
+//		this_rot
+
 void one_sin_pal(LEDStruct& leds) {
 	leds.start_index += leds.this_inc;
 	leds.this_index = leds.start_index;
@@ -30,3 +48,5 @@ void one_sin_pal_ring(LEDStruct& leds) {
 		leds.this_index += leds.this_rot;
 	}
 }
+
+#endif

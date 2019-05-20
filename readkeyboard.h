@@ -12,14 +12,12 @@ void readkeyboard() {
 
 		switch (in_byte) {
 
-			// Command: a {hue} - set entire strip to {hue} (0-255)
-		//case 97:
-		//	//led_mode = 0;
-		//	this_arg = Serial.parseInt();
-		//	this_arg = constrain(this_arg, 0, 255);
-		//	Serial.println(this_arg);
-		//	fill_solid(actual_leds, NUM_LEDS, CHSV(this_arg, 255, 255));
-		//	break;
+			// Command: a switch blending, 0 = NOBLEND, 1 = LINEARBLEND
+		case 97:
+			this_arg = Serial.parseInt();
+			if (this_arg) {	actual_leds.current_blending = LINEARBLEND;	}
+			else { actual_leds.current_blending = NOBLEND; }
+			break;
 
 			// Command: b {brightness} - set entire strip to {brightness} (0-255)
 		case 98:
@@ -31,11 +29,11 @@ void readkeyboard() {
 			break;
 
 			// Command: c - clear strip
-		case 99:
-			Serial.println("Clearing strip ");
-			led_mode = 0;
-			strobe_mode(led_mode, 1, 0);
-			break;
+		//case 99:
+		//	Serial.println("Clearing strip ");
+		//	led_mode = 0;
+		//	strobe_mode(led_mode, 1, 0);
+		//	break;
 
 			// Command: d {delay} - set the delay amount to {delay} (0-255)
 		case 100:
@@ -83,17 +81,8 @@ void readkeyboard() {
 			this_arg = Serial.parseInt();
 			actual_leds.this_hue = constrain(this_arg, 0, 255);
 			Serial.print("Hue: ");
-			Serial.println(this_hue);
+			Serial.println(actual_leds.this_hue);
 			break;
-
-			// Command: i {hue} - set similar palette with selected hue {hue} (0-255)
-		//case 105:
-		//	//palette_change = 0;
-		//	this_arg = Serial.parseInt();
-		//	actual_leds.this_hue = constrain(this_arg, 0, 255);
-		//	Serial.println(this_hue);
-		//	SetupMySimilar4Palette();
-		//	break;
 
 			// Command: m {mode} - select mode {mode} (0-255)
 		case 109:
@@ -107,18 +96,77 @@ void readkeyboard() {
 			strobe_mode(new_leds.led_mode, 1); // strobe the updated mode, mc = 1, old = 0 (so cur_leds)		
 			break;
 
-			// Command: n - toggle direction
-		//case 110:
-		//	Serial.println(" ");
-		//	this_dir = !this_dir;
-		//	break;
+			// Command: i Change this_inc (0-255)
+		case 105:
+			this_arg = Serial.parseInt();
+			actual_leds.this_inc = constrain(this_arg, 0, 255);
+			Serial.print("this_inc: ");
+			Serial.println(actual_leds.this_inc);
+			break;
 
-			// Command: p {0/1/2} - set demo mode (fixed/sequential/shuffle)
-		//case 112:
-		//	demo_run = Serial.parseInt();
-		//	demo_run = constrain(demo_run, 0, 2);
-		//	Serial.println(demo_run);
-		//	break;
+			// Command: j Change this_speed (0-255)
+		case 106:
+			this_arg = Serial.parseInt();
+			actual_leds.this_speed = constrain(this_arg, 0, 255);
+			Serial.print("this_speed: ");
+			Serial.println(actual_leds.this_speed);
+			break;
+
+			// Command: k Change this_rot (0-255)
+		case 107:
+			this_arg = Serial.parseInt();
+			actual_leds.this_rot = constrain(this_arg, 0, 255);
+			Serial.print("this_rot: ");
+			Serial.println(actual_leds.this_rot);
+			break;
+
+			// Command: l Change this_cutoff (0-255)
+		case 108:
+			this_arg = Serial.parseInt();
+			actual_leds.this_cutoff = constrain(this_arg, 0, 255);
+			Serial.print("this_cutoff: ");
+			Serial.println(actual_leds.this_cutoff);
+			break;
+
+			// Command: n Change all_freq (0-255)
+		case 110:
+			this_arg = Serial.parseInt();
+			actual_leds.all_freq = constrain(this_arg, 0, 255);
+			Serial.print("all_freq: ");
+			Serial.println(actual_leds.all_freq);
+			break;
+
+			// Command: o Change this_fade (0-255)
+		case 111:
+			this_arg = Serial.parseInt();
+			actual_leds.this_fade = constrain(this_arg, 0, 255);
+			Serial.print("this_fade: ");
+			Serial.println(actual_leds.this_fade);
+			break;
+
+			// Command: p Change numdots_ring (0-255)
+		case 112:
+			this_arg = Serial.parseInt();
+			actual_leds.numdots_ring = constrain(this_arg, 0, 255);
+			Serial.print("numdots_ring: ");
+			Serial.println(actual_leds.numdots_ring);
+			break;
+
+			// Command: q Change this_beat (0-255)
+		case 113:
+			this_arg = Serial.parseInt();
+			actual_leds.this_beat = constrain(this_arg, 0, 255);
+			Serial.print("this_beat: ");
+			Serial.println(actual_leds.this_beat);
+			break;
+
+			// Command: r Change all_freq (0-255)
+		case 114:
+			this_arg = Serial.parseInt();
+			actual_leds.this_diff = constrain(this_arg, 0, 255);
+			Serial.print("this_diff: ");
+			Serial.println(actual_leds.this_diff);
+			break;
 
 			// Command: s {saturation} - set saturation to {saturation} (0-255)
 		case 115:
@@ -126,6 +174,55 @@ void readkeyboard() {
 			actual_leds.this_sat = constrain(this_arg, 0, 255);
 			Serial.print("Saturation: ");
 			Serial.println(actual_leds.this_sat);
+			break;
+
+			// Command: t {0/1} - juggle_index_reset
+		case 116:
+			this_arg = Serial.parseInt();
+			if (this_arg) {	actual_leds.juggle_index_reset = 1;	}
+			else { actual_leds.juggle_index_reset = 0; }
+			Serial.print("Juggle_index_reset: ");
+			Serial.println(actual_leds.juggle_index_reset);
+			break;
+
+			// Command: u Change this_bright (0-255)
+		case 117:
+			this_arg = Serial.parseInt();
+			actual_leds.this_bright = constrain(this_arg, 0, 255);
+			Serial.print("this_bright: ");
+			Serial.println(actual_leds.this_bright);
+			break;
+
+			// Command: v Change numdots (0-255)
+		case 118:
+			this_arg = Serial.parseInt();
+			actual_leds.numdots = constrain(this_arg, 0, 255);
+			Serial.print("numdots: ");
+			Serial.println(actual_leds.numdots);
+			break;
+
+			// Command: w Change numdots (0-255)
+		case 119:
+			this_arg = Serial.parseInt();
+			actual_leds.cooling = constrain(this_arg, 0, 255);
+			Serial.print("cooling: ");
+			Serial.println(actual_leds.cooling);
+			break;
+
+			// Command: x Change numdots (0-255)
+		case 120:
+			this_arg = Serial.parseInt();
+			actual_leds.sparking = constrain(this_arg, 0, 255);
+			Serial.print("sparking: ");
+			Serial.println(actual_leds.sparking);
+			break;
+
+			// Command: y Change numdots (0-255)
+		case 121:
+			this_arg = Serial.parseInt();
+			actual_leds.circ_scale = constrain(this_arg, 0, 255);
+			Serial.print("circ_scale: ");
+			Serial.println(actual_leds.circ_scale);
 			break;
 
 			// Command: t {0/1/2/3} - set palette mode (fixed/4similar/random4/random16)

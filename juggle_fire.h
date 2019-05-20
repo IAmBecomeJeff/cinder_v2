@@ -46,16 +46,17 @@
 //				this_fade 
 //				numdots_ring
 //				this_beat
-//				current_palette
+//				target_palette
 //				this_bright
 //				current_blending
 //				this_diff
+//				juggle_index_reset
 //				ringBeat[]		(only used in columns modes)
 //				gHue			(auto set; only used in sinelon modes)
 //	ComboB / ComboD:
 //				cooling
 //				sparking
-//				current_palete			(only used in pal modes)
+//				target_palete			(only used in pal modes)
 //				this_bright				(only used in pal modes)
 //				current_blending		(only used in pal modes)
 //				cooling_columns[]		(only used in columns modes)
@@ -66,6 +67,7 @@
 
 // *******juggle with fire()********
 void juggle_fire(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {		// Checks if it's new LEDS and two combos are running (i.e. transitioning between two combo modes).. C and D will only go to new_leds during 2 combo mode
 		juggle_ring(comboC_leds);
 		fire(comboD_leds);
@@ -84,6 +86,7 @@ void juggle_fire(LEDStruct& leds) {
 
 
 void juggle_onedir_fire(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire(comboD_leds);
@@ -102,6 +105,7 @@ void juggle_onedir_fire(LEDStruct& leds) {
 
 
 void juggle_columns_fire(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire(comboD_leds);
@@ -120,6 +124,7 @@ void juggle_columns_fire(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire(comboD_leds);
@@ -139,6 +144,7 @@ void juggle_columns_onedir_fire(LEDStruct& leds) {
 
 // *******juggle with fire_pal()********
 void juggle_fire_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_pal(comboD_leds);
@@ -157,6 +163,7 @@ void juggle_fire_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_pal(comboD_leds);
@@ -175,6 +182,7 @@ void juggle_onedir_fire_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_pal(comboD_leds);
@@ -193,6 +201,7 @@ void juggle_columns_fire_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_pal(comboD_leds);
@@ -212,6 +221,7 @@ void juggle_columns_onedir_fire_pal(LEDStruct& leds) {
 
 // *******juggle with fire_mirror()********
 void juggle_fire_mirror(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror(comboD_leds);
@@ -230,6 +240,7 @@ void juggle_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror(comboD_leds);
@@ -248,6 +259,7 @@ void juggle_onedir_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror(comboD_leds);
@@ -266,6 +278,7 @@ void juggle_columns_fire_mirror(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror(comboD_leds);
@@ -285,6 +298,7 @@ void juggle_columns_onedir_fire_mirror(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_pal()********
 void juggle_fire_mirror_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_pal(comboD_leds);
@@ -303,6 +317,7 @@ void juggle_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_pal(comboD_leds);
@@ -321,6 +336,7 @@ void juggle_onedir_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_pal(comboD_leds);
@@ -339,6 +355,7 @@ void juggle_columns_fire_mirror_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_pal(comboD_leds);
@@ -358,6 +375,7 @@ void juggle_columns_onedir_fire_mirror_pal(LEDStruct& leds) {
 
 // *******juggle with fire_columns()********
 void juggle_fire_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_columns(comboD_leds);
@@ -376,6 +394,7 @@ void juggle_fire_columns(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_columns(comboD_leds);
@@ -394,6 +413,7 @@ void juggle_onedir_fire_columns(LEDStruct& leds) {
 
 
 void juggle_columns_fire_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_columns(comboD_leds);
@@ -412,6 +432,7 @@ void juggle_columns_fire_columns(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_columns(comboD_leds);
@@ -430,6 +451,7 @@ void juggle_columns_onedir_fire_columns(LEDStruct& leds) {
 
 // *******juggle with fire_columns_pal()********
 void juggle_fire_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_columns_pal(comboD_leds);
@@ -448,6 +470,7 @@ void juggle_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_columns_pal(comboD_leds);
@@ -466,6 +489,7 @@ void juggle_onedir_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_columns_pal(comboD_leds);
@@ -484,6 +508,7 @@ void juggle_columns_fire_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_columns_pal(comboD_leds);
@@ -503,6 +528,7 @@ void juggle_columns_onedir_fire_columns_pal(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_columns()********
 void juggle_fire_mirror_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_columns(comboD_leds);
@@ -521,6 +547,7 @@ void juggle_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_columns(comboD_leds);
@@ -539,6 +566,7 @@ void juggle_onedir_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_columns(comboD_leds);
@@ -557,6 +585,7 @@ void juggle_columns_fire_mirror_columns(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_columns(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_columns(comboD_leds);
@@ -576,6 +605,7 @@ void juggle_columns_onedir_fire_mirror_columns(LEDStruct& leds) {
 
 // *******juggle with fire_mirror_columns_pal()********
 void juggle_fire_mirror_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
@@ -594,6 +624,7 @@ void juggle_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_ring_onedir(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
@@ -612,6 +643,7 @@ void juggle_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_fire_mirror_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_all(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
@@ -630,6 +662,7 @@ void juggle_columns_fire_mirror_columns_pal(LEDStruct& leds) {
 
 
 void juggle_columns_onedir_fire_mirror_columns_pal(LEDStruct& leds) {
+	combo_copy(leds);
 	if (leds.isNew && combo_num == 2) {
 		juggle_columns_onedir_all(comboC_leds);
 		fire_mirror_columns_pal(comboD_leds);
