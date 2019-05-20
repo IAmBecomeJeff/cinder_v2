@@ -155,157 +155,157 @@ void strobe_mode(LEDStruct& leds, bool mc) {
 			break;
 
 		case 30:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire(leds);
 			break;
 
 		case 31:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire(leds);
 			break;
 
 		case 32:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire(leds);
 			break;
 
 		case 33:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_pal(leds);
 			break;
 
 		case 34:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_pal(leds);
 			break;
 
 		case 35:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_pal(leds);
 			break;
 
 		case 36:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_pal(leds);
 			break;
 
 		case 37:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_mirror(leds);
 			break;
 
 		case 38:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_mirror(leds);
 			break;
 
 		case 39:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_mirror(leds);
 			break;
 
 		case 40:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_mirror(leds);
 			break;
 
 		case 41:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_mirror_pal(leds);
 			break;
 
 		case 42:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_mirror_pal(leds);
 			break;
 
 		case 43:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_mirror_pal(leds);
 			break;
 
 		case 44:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking = 60; leds.cooling = 50; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_mirror_pal(leds);
 			break;
 
 		case 45:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_columns(leds);
 			break;
 
 		case 46:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_columns(leds);
 			break;
 
 		case 47:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_columns(leds);
 			break;
 
 		case 48:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_columns(leds);
 			break;
 
 		case 49:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_columns_pal(leds);
 			break;
 
 		case 50:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_columns_pal(leds);
 			break;
 
 		case 51:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_columns_pal(leds);
 			break;
 
 		case 52:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_columns_pal(leds);
 			break;
 
 		case 53:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_mirror_columns(leds);
 			break;
 
 		case 54:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_mirror_columns(leds);
 			break;
 
 		case 55:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_mirror_columns(leds);
 			break;
 
 		case 56:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_mirror_columns(leds);
 			break;
 
 		case 57:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_fire_mirror_columns_pal(leds);
 			break;
 
 		case 58:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 65, 70 }; leds.cooling_columns = { 32, 54, 150, 30 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots_ring = 4; leds.this_beat = 10; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_onedir_fire_mirror_columns_pal(leds);
 			break;
 
 		case 59:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_mirror_columns_pal(leds);
 			break;
 
 		case 60:
-			if (mc) { leds.this_delay = 10; }
+			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns = { 60, 40, 80, 100 }; leds.cooling_columns = { 50, 40, 80, 55 }; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat = { 1, 4, 3, 4 }; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_mirror_columns_pal(leds);
 			break;
 
