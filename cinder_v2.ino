@@ -25,6 +25,7 @@
 #include "ripple.h"
 #include "plasma.h"
 #include "spiral.h"
+#include "rainbow_waves.h"
 
 #include "strobe_mode.h"
 #include "readkeyboard.h"

@@ -74,6 +74,12 @@ struct LEDStruct {
 	int plasma_phase2;
 	uint8_t plasma_index;
 	uint8_t plasma_bright;
+
+	// ***** RAINBOW WAVE VARIABLES *****
+	byte num_sparks = 5;
+	byte spark_life = 4;
+	uint16_t lead_led = 0;
+
 };
 
 LEDStruct new_leds;
