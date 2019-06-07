@@ -33,9 +33,7 @@ uint8_t w = 3; // spiral array width
 
 // Transition and mode variables
 uint8_t old_mode = 0;
-uint8_t max_mode = 55;
-uint8_t transitioning = 0;
-bool transition_wait = 0;
+uint8_t max_mode = 63;
 uint8_t blending_ratio = 0;
 uint8_t combo_modes[32] = { 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60 }; // led_modes that use a combo LEDStruct
 uint8_t combo_modes_size = sizeof(combo_modes) / sizeof(uint8_t);
@@ -48,7 +46,10 @@ CHSV transition_color(CHSV(0, 255, 255));
 uint8_t amount_of_color = 0;
 bool color_direction = 1;
 bool get_new_color = 1;
+uint8_t transitioning = 0;
+bool transition_wait = 0;
 uint8_t max_transitions = 4;
+bool transition_lock = 0;
 
 
 

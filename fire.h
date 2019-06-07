@@ -258,5 +258,34 @@ void fire_mirror_columns_pal(LEDStruct& leds) {
 }
 
 
+void fire_spiral(LEDStruct& leds) {
+
+	for (uint8_t i = 0; i < STRIP_LENGTH; i++) {
+		leds.heat[i] = qsub8(leds.heat[i], random8(0, ((leds.cooling * 10) / STRIP_LENGTH) + 2));
+	}
+
+	for (int k = STRIP_LENGTH - 3; k >= 2; k--) {
+		leds.heat[k] = (leds.heat[k - 1] + leds.heat[k - 2] + leds.heat[k - 2]) / 3;
+	}
+
+	if (random8() < leds.sparking) {
+		int y = random8(7);
+		leds.heat[y] = qadd8(leds.heat[y], random8(160, 255));
+	}
+
+	if (leds.this_dir) {
+		for (int j = 0; j < STRIP_LENGTH; j++) {
+			CRGB hcolor = HeatColor(leds.heat[j]);
+			leds.strip[spiralArray[leds.spiral_num][j]] = hcolor;
+		}
+	}
+	else {
+		for (int j = 0; j < STRIP_LENGTH; j++) {
+			CRGB hcolor = HeatColor(leds.heat[j]);
+			leds.strip[spiralArray[leds.spiral_num][STRIP_LENGTH - 1 - j]] = hcolor;
+		}
+	}
+}
+
 
 #endif

@@ -300,14 +300,28 @@ void strobe_mode(LEDStruct& leds, bool mc) {
 			break;
 
 		case 59:
-			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns[0] = 50; leds.sparking_columns[1] = 60; leds.sparking_columns[2] = 20; leds.sparking_columns[3] = 80;  leds.cooling_columns[0] = 50; leds.cooling_columns[1] = 40; leds.cooling_columns[2] = 30; leds.cooling_columns[3] = 60; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat[0] = 1; leds.ringBeat[1] = 4; leds.ringBeat[2] = 3; leds.ringBeat[3] = 4; leds.this_bright = 255; leds.this_diff = 4; }
+			if (mc) { leds.this_delay = 10;  leds.target_palette = ofaurora_gp; leds.sparking_columns[0] = 50; leds.sparking_columns[1] = 60; leds.sparking_columns[2] = 20; leds.sparking_columns[3] = 80;  leds.cooling_columns[0] = 50; leds.cooling_columns[1] = 40; leds.cooling_columns[2] = 30; leds.cooling_columns[3] = 60; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat[0] = 1; leds.ringBeat[1] = 4; leds.ringBeat[2] = 3; leds.ringBeat[3] = 4; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_fire_mirror_columns_pal(leds);
 			break;
 
 		case 60:
-			if (mc) { leds.this_delay = 10;  leds.this_delay = 10; leds.target_palette = ofaurora_gp; leds.sparking_columns[0] = 50; leds.sparking_columns[1] = 60; leds.sparking_columns[2] = 20; leds.sparking_columns[3] = 80;  leds.cooling_columns[0] = 50; leds.cooling_columns[1] = 40; leds.cooling_columns[2] = 30; leds.cooling_columns[3] = 60; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat[0] = 1; leds.ringBeat[1] = 4; leds.ringBeat[2] = 3; leds.ringBeat[3] = 4; leds.this_bright = 255; leds.this_diff = 4; }
+			if (mc) { leds.this_delay = 10;  leds.target_palette = ofaurora_gp; leds.sparking_columns[0] = 50; leds.sparking_columns[1] = 60; leds.sparking_columns[2] = 20; leds.sparking_columns[3] = 80;  leds.cooling_columns[0] = 50; leds.cooling_columns[1] = 40; leds.cooling_columns[2] = 30; leds.cooling_columns[3] = 60; leds.juggle_index_reset = 0; leds.this_fade = 64; leds.numdots = 3; leds.ringBeat[0] = 1; leds.ringBeat[1] = 4; leds.ringBeat[2] = 3; leds.ringBeat[3] = 4; leds.this_bright = 255; leds.this_diff = 4; }
 			juggle_columns_onedir_fire_mirror_columns_pal(leds);
 			break;
 
+		case 61:
+			if (mc) { leds.this_delay = 10;  leds.spark_life = 4; leds.num_sparks = 6; }
+			rainbow_wave_moving_dot(leds);
+			break;
+
+		case 62:
+			if (mc) { leds.this_delay = 10; }
+			rainbow_wave(leds);
+			break;
+
+		case 63:
+			if (mc) { leds.this_delay = 15; leds.sparking = 80; leds.cooling = 30; leds.spiral_num = 0; }
+			fire_spiral(leds);
+			break;
 	}
 }

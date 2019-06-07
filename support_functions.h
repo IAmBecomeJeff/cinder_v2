@@ -31,6 +31,7 @@ void combo_check() {
 	for (int i = 0; i < combo_modes_size; i++) {
 		if (new_leds.led_mode == combo_modes[i]) {
 			new_leds.combo = 1;
+			break;
 		}
 		else { new_leds.combo = 0; }
 	}
@@ -62,14 +63,13 @@ void combo_copy(LEDStruct& leds) {
 		comboC_leds.this_diff = leds.this_diff;
 		comboC_leds.juggle_index_reset = leds.juggle_index_reset;
 		comboC_leds.target_palette = leds.target_palette;
-    for (uint8_t i = 0; i < 4; i++){
-      comboC_leds.ringBeat[i] = leds.ringBeat[i];
-      comboD_leds.cooling_columns[i] = leds.cooling_columns[i];
-      comboD_leds.sparking_columns[i] = leds.sparking_columns[i];
-    }
+		for (uint8_t i = 0; i < 4; i++){
+		   comboC_leds.ringBeat[i] = leds.ringBeat[i];
+		   comboD_leds.cooling_columns[i] = leds.cooling_columns[i];
+		   comboD_leds.sparking_columns[i] = leds.sparking_columns[i];
+		}
 		comboD_leds.cooling = leds.cooling;
 		comboD_leds.sparking = leds.sparking;
-		comboD_leds.current_palette = fire_gp;
 	}
 	else {
 		comboA_leds.this_fade = leds.this_fade;
@@ -79,14 +79,13 @@ void combo_copy(LEDStruct& leds) {
 		comboA_leds.this_diff = leds.this_diff;
 		comboA_leds.juggle_index_reset = leds.juggle_index_reset;
 		comboA_leds.target_palette = leds.target_palette;
-    for (uint8_t i = 0; i < 4; i++){
-      comboA_leds.ringBeat[i] = leds.ringBeat[i];
-      comboB_leds.cooling_columns[i] = leds.cooling_columns[i];
-      comboB_leds.sparking_columns[i] = leds.sparking_columns[i];
-    }
+		for (uint8_t i = 0; i < 4; i++){
+		   comboA_leds.ringBeat[i] = leds.ringBeat[i];
+		   comboB_leds.cooling_columns[i] = leds.cooling_columns[i];
+		   comboB_leds.sparking_columns[i] = leds.sparking_columns[i];
+		}
 		comboB_leds.cooling = leds.cooling;
 		comboB_leds.sparking = leds.sparking;
-		comboB_leds.current_palette = fire_gp;
 	}
 }
 
@@ -115,7 +114,6 @@ void checkDirection() {
 }
 
 
-
 // *************** Rotary Knob Functions ***************
 
 // Increase or decrease LEDStruct's delay based on boolean direction
@@ -124,7 +122,6 @@ void delay_change(LEDStruct& leds, bool delay_direction) {
 	else { leds.this_delay--; }
 	constrain(leds.this_delay, 5, 1000);
 }
-
 
 // Find index of current (target) palette
 void updatePaletteIndex(LEDStruct& leds) {
@@ -135,7 +132,6 @@ void updatePaletteIndex(LEDStruct& leds) {
 		}
 	}
 }
-
 
 // Increase or decrease LEDSstruct's palette based on boolean direction
 void palette_change(LEDStruct& leds, bool direction) {
@@ -151,6 +147,9 @@ void palette_change(LEDStruct& leds, bool direction) {
 
 
 // *************** TRANSITION FUNCTIONS ***************
+
+// Transition 1
+// Blend
 void transition1() {
 	//if (transition_wait) {
 	blending_ratio += 1;
@@ -168,7 +167,9 @@ void transition1() {
 	//transition_wait = !transition_wait;
 }
 
-void transition2() { // White line drops down
+// Transition 2
+// White line drops down
+void transition2() { 
 	for (int r = 0; r < 4; r++) {
 		for (int i = 0; i < line; i++) {
 			actual_leds.strip[ringArray[i][r]] = old_leds.strip[ringArray[i][r]];
@@ -198,8 +199,9 @@ void transition2() { // White line drops down
 	}
 }
 
-
-void transition3() { // White lines from middle
+// Transition 3
+// White lines from middle
+void transition3() { 
 	for (int r = 0; r < 4; r++){
 		for (int i = 0; i < STRIP_LENGTH; i++) {
 			if (i < downline ||  i > upline) {
@@ -234,8 +236,9 @@ void transition3() { // White lines from middle
 	}
 }
 
-
-void transition4() { // Fade old_leds to random color, and return back to new_leds
+// Tranisition 4
+// Fade old_leds to random color, and return back to new_leds
+void transition4() { 
 	if (get_new_color) {
 		transition_color = CHSV(random8(), 255, 255);
 		get_new_color = 0;

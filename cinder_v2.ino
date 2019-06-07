@@ -12,6 +12,7 @@
 #include "LEDStruct.h"
 #include "rings.h"
 #include "support_functions.h" 
+#include "rotary_functions.h"
 
 #include "one_sin_pal.h"
 #include "confetti.h"
@@ -33,17 +34,29 @@
 
 
 void setup() {
+	// Serial SETUP, REMOVE
 	Serial.begin(SERIAL_BAUDRATE);
 	Serial.setTimeout(SERIAL_TIMEOUT);
 
+	// Delay
 	delay(2000);
+
+	// LEDS setup
 	LEDS.setBrightness(overall_bright);
 	LEDS.addLeds<LED_TYPE, DATA_PIN, CLOCK_PIN, COLOR_ORDER>(actual_leds.strip, NUM_LEDS);
-	set_max_power_in_volts_and_milliamps(5, 5000);	// TODO update this for live values
+	FastLED.setMaxPowerInVoltsAndMilliamps(5, 5000);	// TODO update this for live values
+
+	// Random Variables
 	random16_set_seed(4832);
 	random16_add_entropy(analogRead(2));
+
+	// Static (mostly) variables for specific LEDStructs
 	new_leds.isNew = 1;
+	comboB_leds.target_palette = fire_gp;
+	comboD_leds.target_palette = fire_gp;
 	actual_leds.target_palette = RainbowColors_p;
+
+	// Fill LEDs with initial values
 	strobe_mode(actual_leds, 1);
 
 	// Set up rotary encoder
@@ -58,176 +71,103 @@ void setup() {
 	pinMode(switchA, INPUT_PULLUP);
 	pinMode(switchB, INPUT_PULLUP);
 
-	array_init();
+	// Initialize Ring/Column and Spiral Arrays, as well as circnoise variables
+	array_init();			// support_functions.h
 
 }
 
 void loop() {
 
 	// Get keyboard input
-	readkeyboard();
+	readkeyboard();			// support_functions.h
 
 	// Check rotary dial
-	checkDial();
+	checkDial();			// rotary_functions.h
 
 	// Check switchA for direction
-	checkDirection();
+	checkDirection();		// support_functions.h
 
-	EVERY_N_MILLISECONDS(50) {	// Palette blending
+	// Palette blending
+	EVERY_N_MILLISECONDS(50) {	
 		uint8_t maxChanges = 24;
 		if (transitioning > 0) {	// If transitioning, update new and old palettes
 			nblendPaletteTowardPalette(new_leds.current_palette, new_leds.target_palette, maxChanges);
 			nblendPaletteTowardPalette(old_leds.current_palette, old_leds.target_palette, maxChanges);
 		}
-		else {		// If not transitioning, update actual leds palette, which it gained from new_leds at the end of transitioning
+		else {					// If not transitioning, update actual leds palette, which it gained from new_leds at the end of transitioning
 			nblendPaletteTowardPalette(actual_leds.current_palette, actual_leds.target_palette, maxChanges);
 		}
 	}
-
-	EVERY_N_SECONDS(20) {		// Transition every N seconds
-		old_leds = actual_leds; //  copy_led_struct(old_leds, actual_leds);	// copy the currently running leds into old_leds
-		new_leds.led_mode = random8(1, max_mode + 1);
-		transitioning = random8(1, max_transitions + 1);
-		combo_check();
-		strobe_mode(new_leds, 1);			// fill new_leds with the next animation
+	
+	// Transition every N seconds if switch B active
+	EVERY_N_SECONDS(20) {
+		if (digitalRead(switchB)) {
+			old_leds = actual_leds;				// copy the currently running leds into old_leds
+			new_leds.led_mode = random8(1, max_mode + 1);
+			if (!transition_lock) {
+				transitioning = (transisitioning + 1) % max_transitions + 1;
+				//transitioning = random8(1, max_transitions + 1);
+			}
+			combo_check();						// support_functions.h
+			strobe_mode(new_leds, 1);			// fill new_leds with the next animation
+		};
 	}
-
-	EVERY_N_MILLIS_I(old_timer, old_leds.this_delay) {	// Keep a timer for the old leds to function independently of new leds
+	
+	// old_leds timer	-	only runs when transitioning
+	EVERY_N_MILLIS_I(old_timer, old_leds.this_delay) {	
 		if (transitioning > 0) {
 			old_timer.setPeriod(old_leds.this_delay);
 			strobe_mode(old_leds, 0);
 		}
 	}
 
-	EVERY_N_MILLIS_I(new_timer, new_leds.this_delay) {	// timer for new leds
+	// new_leds timer	-	only runs when transitioning
+	EVERY_N_MILLIS_I(new_timer, new_leds.this_delay) {	
 		if (transitioning > 0) {
 			new_timer.setPeriod(new_leds.this_delay);
 			strobe_mode(new_leds, 0);
 		}
 	}
 
-	EVERY_N_MILLIS_I(actual_timer, actual_leds.this_delay) {	// timer for actual leds in regular mode
+	// actual_leds timer   -   only runs when not transitioning.  then actual_leds is set by transition function
+	EVERY_N_MILLIS_I(actual_timer, actual_leds.this_delay) {	
 		actual_timer.setPeriod(actual_leds.this_delay);
 		if (!transitioning) {
 			strobe_mode(actual_leds, 0);
 		}
 	}
 	
+	// Transition functions		- support_functions.h
 	EVERY_N_MILLIS(5){
-		if (transitioning == 1) {						// TODO, update with multiple transition types
-			transition1();
-		}
-		if (transitioning == 2){
-			transition2();
-		}
-		if (transitioning == 3) {
-			transition3();
-		}
-		if (transitioning == 4){
-			transition4();
+		switch (transitioning){
+			case 0:
+				break;
+
+			case 1:
+				transition1();
+				break;
+			
+			case 2:
+				transition2();
+				break;
+
+			case 3:
+				transition3();
+				break;
+
+			case 4:
+				transition4();
+				break;	
 		}
 	}
 
-	if (glitter) addglitter(10);
+	// glitter
+	if (glitter) addglitter(10);		// support_functions.h
 
-	show_at_max_brightness_for_power();
+	// Show LEDs
+	FastLED.show();
+
 } // loop()
 
 
-void checkDial() {
-	debouncer.update();
-	if (debouncer.fell()) {	pinSWstate = 0;	}
-	else { pinSWstate = 1; }
 
-	if (!pinSWstate) {	// If pinSW was pressed, update what the dial does
-		rotary_function += 1;
-		if (rotary_function > 3) {	// If above max rotary modes, loop back to 0
-			rotary_function = 0;
-		}
-		Serial.print("Button Function: ");	// Add back if we use Serial data again
-		Serial.println(rotary_function);
-	}
-	
-	aVal = digitalRead(pinA);   // Read pinA
-	if ((aVal != pinALast)) {//&&(aVal==LOW)){      // If pinA has changed, update things.   Added the &&
-		rotateCount = !rotateCount;   // If at 0, change to 1... if at 1 change to 0 and don't update.
-		if (rotateCount) {    // Need to let it change twice
-			switch (rotary_function) {
-
-				case 0: // If button is in stage 0:  Increase or decrease mode based on case order
-					if (transitioning == 0) {
-						old_leds = actual_leds; // copy_led_struct(old_leds, actual_leds);
-						if (digitalRead(pinB) != aVal) { new_leds.led_mode = old_leds.led_mode + 1; }	// Means pin A changed first, we're rotating CW
-						else { new_leds.led_mode = old_leds.led_mode - 1; }								// Means pin B changed first, we're moving CCW
-						if (new_leds.led_mode < 0) { new_leds.led_mode = max_mode; }
-						if (new_leds.led_mode > max_mode) { new_leds.led_mode = 0; }
-						transitioning = 1;
-						combo_check();
-						strobe_mode(new_leds, 1);
-					}
-					break;
-
-				case 1: // If button is in stage 1:		Update palettes based on palette index 
-					if (digitalRead(pinB) != aVal) {
-						if (transitioning == 0) {
-							palette_change(actual_leds, 1);
-						}
-						else {
-							palette_change(new_leds, 1);
-							palette_change(old_leds, 1);
-						}
-					}
-					else {
-						if (transitioning == 0) {
-							palette_change(actual_leds, 0);
-						}
-						else {
-							palette_change(new_leds, 0);
-							palette_change(old_leds, 0);
-						}
-					}
-					Serial.print("Palette number: ");
-					Serial.println(palette_index);
-					break;
-
-				case 2:		// If button is in stage 2:		Adjust delay speed   TODO: consider proportionally updating new and old speeds?
-					if (digitalRead(pinB) != aVal) {
-						if (transitioning > 0) {
-							delay_change(old_leds, 0);
-							delay_change(new_leds, 0);
-						}
-						else {
-							delay_change(actual_leds,0);
-						}
-					}
-					else{
-						if (transitioning > 0) {
-							delay_change(old_leds, 1);
-							delay_change(old_leds, 1);
-						}
-						else {
-							delay_change(actual_leds, 1);
-						}
-					}
-					Serial.print("Delay: ");
-					Serial.println(actual_leds.this_delay);
-					break;
-
-				case 3:		// If button in stage 3:	Adjust brightness
-					if (digitalRead(pinB) != aVal) {
-						overall_bright++;
-					}
-					else {
-						overall_bright--;
-					}
-					constrain(overall_bright, 0, max_bright);
-					FastLED.setBrightness(overall_bright);
-					Serial.print("Brightness: ");
-					Serial.println(overall_bright);
-					break;
-
-			}
-		}
-	}
-	pinALast = aVal;
-}
