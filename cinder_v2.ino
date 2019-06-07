@@ -12,7 +12,7 @@
 #include "LEDStruct.h"
 #include "rings.h"
 #include "support_functions.h" 
-#include "rotary_functions.h"
+
 
 #include "one_sin_pal.h"
 #include "confetti.h"
@@ -30,7 +30,7 @@
 
 #include "strobe_mode.h"
 #include "readkeyboard.h"
-
+#include "rotary_functions.h"
 
 
 void setup() {
@@ -105,7 +105,7 @@ void loop() {
 			old_leds = actual_leds;				// copy the currently running leds into old_leds
 			new_leds.led_mode = random8(1, max_mode + 1);
 			if (!transition_lock) {
-				transitioning = (transisitioning + 1) % max_transitions + 1;
+				transitioning = (transitioning + 1) % max_transitions + 1;
 				//transitioning = random8(1, max_transitions + 1);
 			}
 			combo_check();						// support_functions.h
@@ -168,6 +168,3 @@ void loop() {
 	FastLED.show();
 
 } // loop()
-
-
-

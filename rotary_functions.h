@@ -1,5 +1,5 @@
 #ifndef ROTARY_FUNCTIONS_H
-#define
+#define ROTARY_FUNCTIONS_H
 
 void checkDial() {
 	debouncer.update();
@@ -30,7 +30,7 @@ void checkDial() {
 						if (new_leds.led_mode < 0) { new_leds.led_mode = max_mode; }
 						if (new_leds.led_mode > max_mode) { new_leds.led_mode = 0; }
 						if (!transition_lock) {
-							transitioning = (transisitioning + 1) % max_transitions + 1;
+							transitioning = (transitioning + 1) % max_transitions + 1;
 							//transitioning = random8(1, max_transitions + 1);
 						}
 						combo_check();

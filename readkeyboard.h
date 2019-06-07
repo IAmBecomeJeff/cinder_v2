@@ -124,7 +124,7 @@ void readkeyboard() {
 				Serial.print("New mode: ");
 				Serial.println(new_leds.led_mode);
 				if (!transition_lock) {
-					transitioning = (transisitioning + 1) % max_transitions + 1;
+					transitioning = (transitioning + 1) % max_transitions + 1;
 					//transitioning = random8(1, max_transitions + 1);
 				}
 				combo_check();
